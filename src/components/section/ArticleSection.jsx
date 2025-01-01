@@ -1,5 +1,5 @@
+import ArticleList from "@/components/atoms/ArticleList";
 import {articles} from "@/data";
-import ArticleList from "../atoms/ArticleList";
 
 const ArticleSection = () => {
   return (
