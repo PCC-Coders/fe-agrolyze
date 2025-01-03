@@ -104,7 +104,7 @@ export default function Navbar() {
             Masuk
           </Link>
           <Link
-            href='/register'
+            href='/daftar'
             className='bg-agro-light-yellow text-black text-sm md:text-base lg:text-m px-3 py-1.5 md:px-4 md:py-2 rounded-lg'
           >
             Daftar
