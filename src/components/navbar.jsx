@@ -23,7 +23,7 @@ export default function Navbar() {
         <div className='ml-4 lg:ml-8'>
           <Link href='/'>
             <Image
-              src='/images/logo.png'
+              src='/images/logo.svg'
               alt='Logo Agrolens'
               width={198}
               height={31}
