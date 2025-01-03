@@ -17,7 +17,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className=' py-4 px-6 md:px-8 lg:px-12 bg-agro-green shadow-lg text-white sticky top-0 z-50'>
+    <nav className='py-2 px-6 md:px-8 lg:px-12 bg-agro-green shadow-lg text-white sticky top-0 z-50'>
       {/* Logo */}
       <div className='flex justify-between items-center container mx-auto'>
         <div className='ml-4 lg:ml-8'>
@@ -98,7 +98,7 @@ export default function Navbar() {
         {/* Action Buttons */}
         <div className='hidden md:flex mr-4 lg:mr-8 space-x-4'>
           <Link
-            href='/login'
+            href='/masuk'
             className='border border-agro-light-yellow text-white text-sm md:text-base lg:text-m px-4 py-1.5 md:px-5 md:py-2 rounded-lg'
           >
             Masuk
