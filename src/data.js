@@ -70,3 +70,36 @@ export const articles = [
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis dignissimos voluptatum facilis nihil, consequatur alias provident blanditiis voluptates nisi quis?",
   },
 ];
+
+export const categories = [
+  {
+    imageUrl: "/images/icon-tanaman.png",
+    title: "Tanaman Pangan",
+    item: "Padi, Jagung, Kedelai, dll",
+  },
+  {
+    imageUrl: "/images/icon-tanaman.png",
+    title: "Tanaman Hortikultural",
+    item: "Buah-buahan, Sayuran, Bunga, dll",
+  },
+  {
+    imageUrl: "/images/icon-tanaman.png",
+    title: "Tanaman Perkebunan",
+    item: "Kelapa Sawit, Kopi, Teh, Karet, dll",
+  },
+  {
+    imageUrl: "/images/icon-tanaman.png",
+    title: "Tanaman Hias",
+    item: "Anggrek, Monstera, Kaktus, dll",
+  },
+  {
+    imageUrl: "/images/icon-tanaman.png",
+    title: "Tanaman Obat",
+    item: "Jahe, Kunyit, Temulawak, dll",
+  },
+  {
+    imageUrl: "/images/icon-tanaman.png",
+    title: "Tanaman Kehutanan",
+    item: "Jati, Mahoni, Meranti, dll",
+  },
+];
