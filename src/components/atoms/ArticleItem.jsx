@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const ArticleList = ({imageUrl, date, author, title}) => {
+const ArticleItem = ({imageUrl, date, author, title}) => {
   return (
     <li>
       <div className='bg-agro-green rounded-lg'>
@@ -28,4 +28,4 @@ const ArticleList = ({imageUrl, date, author, title}) => {
   );
 };
 
-export default ArticleList;
+export default ArticleItem;

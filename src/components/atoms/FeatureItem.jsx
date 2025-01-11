@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const FeatureList = ({imageUrl, description}) => {
+const FeatureItem = ({imageUrl, description}) => {
   return (
     <li>
       <Image
@@ -16,4 +16,4 @@ const FeatureList = ({imageUrl, description}) => {
   );
 };
 
-export default FeatureList;
+export default FeatureItem;

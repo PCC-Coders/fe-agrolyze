@@ -1,4 +1,4 @@
-import FeatureList from "@/components/atoms/FeatureList";
+import FeatureItem from "@/components/atoms/FeatureItem";
 import {features} from "@/data";
 
 const FeatureSection = () => {
@@ -10,7 +10,7 @@ const FeatureSection = () => {
         </h2>
         <ul className='grid lg:grid-cols-3 gap-4 lg:gap-12 items-center'>
           {features.map((feature, index) => (
-            <FeatureList key={index} {...feature} />
+            <FeatureItem key={index} {...feature} />
           ))}
         </ul>
       </div>

@@ -1,4 +1,4 @@
-const TutorialList = ({title, description, svg}) => {
+const TutorialItem = ({title, description, svg}) => {
   return (
     <li className='flex gap-4 items-center'>
       <div className='bg-agro-light-green p-3 rounded-full'>{svg}</div>
@@ -10,4 +10,4 @@ const TutorialList = ({title, description, svg}) => {
   );
 };
 
-export default TutorialList;
+export default TutorialItem;

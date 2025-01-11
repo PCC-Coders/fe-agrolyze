@@ -1,4 +1,4 @@
-import TutorialList from "@/components/atoms/TutorialList";
+import TutorialItem from "@/components/atoms/TutorialItem";
 import {tutorials} from "@/data";
 import Image from "next/image";
 
@@ -12,7 +12,7 @@ const TutorialSection = () => {
         <div className='flex flex-col-reverse lg:flex-row gap-12 items-center'>
           <ul className='grid gap-8 items-center'>
             {tutorials.map((tutorial, index) => (
-              <TutorialList {...tutorial} key={index} />
+              <TutorialItem {...tutorial} key={index} />
             ))}
           </ul>
           <div>

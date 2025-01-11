@@ -1,4 +1,4 @@
-import ArticleList from "@/components/atoms/ArticleList";
+import ArticleItem from "@/components/atoms/ArticleItem";
 import {articles} from "@/data";
 
 const ArticleSection = () => {
@@ -10,7 +10,7 @@ const ArticleSection = () => {
         </h2>
         <ul className='grid lg:grid-cols-3 gap-8 items-center px-4'>
           {articles.map((article, index) => (
-            <ArticleList {...article} key={index} />
+            <ArticleItem {...article} key={index} />
           ))}
         </ul>
       </div>

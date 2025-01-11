@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // New state for mobile menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    // Set state setelah komponen di-mount di client
+  }, []);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -30,17 +34,16 @@ export default function Navbar() {
             />
           </Link>
         </div>
-
         {/* Navigation Links */}
         <ul
           className={`${
             isMenuOpen ? "flex" : "hidden"
-          } p-4 md:flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 lg:space-x-6 font-light text-white text-m md:text-base lg:text-m absolute md:static bg-agro-green md:bg-transparent top-16 left-0 w-full md:w-auto py-4 md:py-0`}
+          } p-4 md:flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-12 font-light text-white text-m md:text-base lg:text-m absolute md:static bg-agro-green md:bg-transparent top-16 left-0 w-full md:w-auto py-4 md:py-0`}
         >
           <li>
             <Link
               href='/'
-              className='hover:font-semibold hover:underline underline-offset-8'
+              className='hover:text-agro-light-yellow hover:underline underline-offset-8'
             >
               Beranda
             </Link>
@@ -48,7 +51,7 @@ export default function Navbar() {
           <li className='relative group'>
             <button
               onClick={toggleDropdown}
-              className='flex items-center hover:font-semibold hover:underline underline-offset-8 focus:outline-none'
+              className='flex items-center hover:text-agro-light-yellow hover:underline underline-offset-8 focus:outline-none'
             >
               Deteksi
               <svg
@@ -88,7 +91,7 @@ export default function Navbar() {
           <li>
             <Link
               href='/diskusi'
-              className='hover:font-semibold hover:underline underline-offset-8'
+              className='hover:text-agro-light-yellow hover:underline underline-offset-8'
             >
               Diskusi
             </Link>
