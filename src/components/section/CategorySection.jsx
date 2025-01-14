@@ -1,8 +1,34 @@
+"use client";
+
+import axios from "axios";
 import Image from "next/image";
-import {categories} from "@/data";
+import {useEffect, useState} from "react";
 import CategoryItem from "../atoms/CategoryItem";
 
 const CategorySection = () => {
+  const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          `https://smartagro-api.sightway.my.id/api/master/post-category`
+        );
+        const {data} = response.data;
+        setCategories(data);
+      } catch (err) {
+        setError("Gagal dalam mengambil data kategori");
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <section className='bg-agro-light-green text-white relative'>
       <div className='md:flex gap-8'>
@@ -12,11 +38,11 @@ const CategorySection = () => {
             <span className='text-agro-yellow'>Kategori</span> Tanaman di
             Indonesia
           </h2>
-          <div className='grid md:grid-cols-2 gap-8 items-center px-6 md:px-0'>
+          <ul className='grid md:grid-cols-2 gap-8 items-center px-6 md:px-0'>
             {categories.map((category) => (
-              <CategoryItem key={category.title} {...category} />
+              <CategoryItem key={category.name} {...category} />
             ))}
-          </div>
+          </ul>
         </div>
       </div>
       <Image

@@ -2,12 +2,12 @@ import {FileInputFlowbite} from "@/components/atoms/flowbite/FileInput";
 
 const JenisTanaman = () => {
   return (
-    <section className='bg-agro-green text-white'>
+    <section className='bg-agro-dark-green text-white'>
       <div className='p-20'>
-        <div className='grid grid-cols-2 gap-8 items-center'>
+        <div className='grid md:grid-cols-2 gap-2 md:gap-8 items-center'>
           <FileInputFlowbite />
           <div>
-            <h2 className='text-2xl lg:text-3xl text-center font-bold my-16'>
+            <h2 className='text-2xl lg:text-3xl text-center font-bold my-6 md:my-16'>
               Cek <span className='text-agro-yellow'>Informasi</span> Tanaman
             </h2>
             <div className='grid gap-2'>
