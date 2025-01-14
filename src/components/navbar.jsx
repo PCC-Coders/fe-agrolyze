@@ -2,141 +2,440 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import {useEffect, useState} from "react";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+import { getToken, isAuthenticated, removeToken } from "@/lib/auth";
+import { CgProfile } from "react-icons/cg";
+import { MdHistory } from "react-icons/md";
+import { IoSettingsOutline } from "react-icons/io5";
+import { LuLogOut } from "react-icons/lu";
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobile menu state
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false); // Dropdown state
+  const [isDeteksiDropdownOpen, setIsDeteksiDropdownOpen] = useState(false); // Dropdown state
+  const [user, setUser] = useState(null);
+  const [isClient, setIsClient] = useState(false); // Perbaikan: Menentukan apakah komponen berjalan di klien
 
-  useEffect(() => {
-    // Set state setelah komponen di-mount di client
-  }, []);
+  // Check if the current pathname matches the link
+  const isActive = (href) => pathname === href;
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  // Toggle mobile menu
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Close mobile menu
+  const handleMenuItemClick = () => setIsMenuOpen(false);
+
+  const toggleUserDropdown = () => {
+    setIsUserDropdownOpen(!isUserDropdownOpen);
+    setIsDeteksiDropdownOpen(false); // Pastikan dropdown lainnya tertutup
   };
 
+  const toggleDeteksiDropdown = () => {
+    setIsDeteksiDropdownOpen(!isDeteksiDropdownOpen);
+  };
+
+  const closeAllDropdowns = () => {
+    setIsUserDropdownOpen(false);
+  };
+
+  useEffect(() => {
+    setIsClient(true); // Menandakan bahwa komponen sudah dimuat di klien
+    const token = getToken();
+    if (token) {
+      // Decode token atau panggil API untuk mendapatkan data user
+      setUser({ name: "User" }); // Simulasi data user
+    }
+  }, []);
+
   return (
-    <nav className='py-2 px-6 md:px-8 lg:px-12 bg-agro-green shadow-lg text-white sticky top-0 z-50'>
+    <nav className="flex justify-between items-center py-4 px-6 md:px-8 lg:px-12 bg-agro-green shadow-lg text-m sticky top-0 z-50">
       {/* Logo */}
-      <div className='flex justify-between items-center container mx-auto'>
-        <div className='ml-4 lg:ml-8'>
-          <Link href='/'>
-            <Image
-              src='/images/logo.svg'
-              alt='Logo Agrolens'
-              width={198}
-              height={31}
-            />
-          </Link>
-        </div>
-        {/* Navigation Links */}
-        <ul
-          className={`${
-            isMenuOpen ? "flex" : "hidden"
-          } p-4 md:flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-12 font-light text-white text-m md:text-base lg:text-m absolute md:static bg-agro-green md:bg-transparent top-16 left-0 w-full md:w-auto py-4 md:py-0`}
-        >
-          <li>
-            <Link
-              href='/'
-              className='hover:text-agro-light-yellow hover:underline underline-offset-8'
-            >
-              Beranda
-            </Link>
-          </li>
-          <li className='relative group'>
-            <button
-              onClick={toggleDropdown}
-              className='flex items-center hover:text-agro-light-yellow hover:underline underline-offset-8 focus:outline-none'
-            >
-              Deteksi
-              <svg
-                className={`ml-2 w-4 h-4 transition-transform ${
-                  isDropdownOpen ? "rotate-180" : ""
-                }`}
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M6 9l6 6 6-6'
-                />
-              </svg>
-            </button>
-            {isDropdownOpen && (
-              <div className='absolute left-0 w-[200px] mt-2 bg-white border border-agro-yellow shadow-lg rounded-md'>
-                <Link
-                  href='/deteksi/jenis-tanaman'
-                  className='block px-4 py-2 text-black text-sm hover:bg-agro-light-yellow hover:text-white'
-                >
-                  Jenis Tanaman
-                </Link>
-                <Link
-                  href='/deteksi/penyakit-tanaman'
-                  className='block px-4 py-2 text-black text-sm hover:bg-agro-light-yellow hover:text-white'
-                >
-                  Penyakit Tanaman
-                </Link>
-              </div>
-            )}
-          </li>
-          <li>
-            <Link
-              href='/diskusi'
-              className='hover:text-agro-light-yellow hover:underline underline-offset-8'
-            >
-              Diskusi
-            </Link>
-          </li>
-        </ul>
+      <div className="text-m font-bold ml-4 lg:ml-8">
+        <Link href="/">
+          <Image
+            src="/images/logo.svg"
+            alt="Logo"
+            width={131}
+            height={50}
+            className="h-auto"
+          />
+        </Link>
+      </div>
 
-        {/* Action Buttons */}
-        <div className='hidden md:flex mr-4 lg:mr-8 space-x-4'>
+      {/* Desktop Menu */}
+      <ul className="hidden md:flex space-x-4 lg:space-x-6 font-light text-white text-sm md:text-base lg:text-m items-center">
+        <li>
           <Link
-            href='/masuk'
-            className='border border-agro-light-yellow text-white text-sm md:text-base lg:text-m px-4 py-1.5 md:px-5 md:py-2 rounded-lg'
+            href="/"
+            className={`mr-7 ${isActive("/") ? "font-semibold underline underline-offset-8 hover:text-agro-yellow" : ""
+              }`}
           >
-            Masuk
+            Beranda
           </Link>
-          <Link
-            href='/daftar'
-            className='bg-agro-light-yellow text-black text-sm md:text-base lg:text-m px-3 py-1.5 md:px-4 md:py-2 rounded-lg'
-          >
-            Daftar
-          </Link>
-        </div>
-
-        {/* Responsive Mobile Menu */}
-        <div className='md:hidden flex items-center'>
+        </li>
+        <li className="relative group">
           <button
-            onClick={toggleMenu}
-            className='text-primary focus:outline-none'
+            onClick={toggleDeteksiDropdown}
+            className="flex items-center hover:text-agro-yellow focus:outline-none mr-7"
           >
+            Deteksi
             <svg
-              className='w-6 h-6'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-              xmlns='http://www.w3.org/2000/svg'
+              className={`ml-2 w-4 h-4 transition-transform ${isDeteksiDropdownOpen ? "rotate-180" : ""
+                }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 strokeWidth={2}
-                d='M4 6h16M4 12h16m-7 6h7'
+                d="M6 9l6 6 6-6"
               />
             </svg>
           </button>
-        </div>
+          {isDeteksiDropdownOpen && (
+            <div className="absolute left-0 w-48 mt-2 bg-white border border-agro-yellow shadow-lg rounded-lg z-10">
+              <Link
+                href="/deteksi/jenis-tanaman"
+                className="block px-4 py-2 text-black hover:bg-agro-light-yellow hover:text-white"
+                onClick={() => {
+                  closeAllDropdowns();
+                  handleMenuItemClick();
+                }}
+              >
+                Jenis Tanaman
+              </Link>
+              <Link
+                href="/deteksi/penyakit-tanaman"
+                className="block px-4 py-2 text-black hover:bg-agro-light-yellow hover:text-white"
+                onClick={() => {
+                  closeAllDropdowns();
+                  handleMenuItemClick();
+                }}
+              >
+                Penyakit Tanaman
+              </Link>
+            </div>
+          )}
+        </li>
+        <li>
+          <Link
+            href="/diskusi"
+            className={`mr-24
+              ${isActive("/diskusi")
+                ? "font-semibold underline underline-offset-8 hover:text-agro-yellow"
+                : ""
+              }`}
+          >
+            Diskusi
+          </Link>
+        </li>
+        {isClient && isAuthenticated() ? (
+          <li className="flex items-center space-x-4">
+            {/* Icon Notifikasi */}
+            <button className="text-white">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                ></path>
+              </svg>
+            </button>
+
+            {/* Foto Profil dan Nama */}
+            <div
+              onClick={toggleUserDropdown}
+              className="flex items-center bg-agro-light-yellow px-4 py-2 rounded-lg cursor-pointer"
+            >
+              <Image
+                src="/images/foto_profil.svg"
+                alt="Profile"
+                width={30}
+                height={30}
+                className="rounded-full"
+              />
+              <span className="ml-2 text-black">{user?.name || "User"}</span>
+              <svg
+                className={`ml-2 w-4 h-4 transition-transform ${isUserDropdownOpen ? "rotate-180" : ""
+                  }`}
+                fill="none"
+                stroke="black"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6"></path>
+              </svg>
+            </div>
+
+            {/* Dropdown Menu */}
+            {isUserDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white border shadow-lg rounded-lg"
+                style={{ top: "calc(100% + 1px)" }}
+              >
+                <Link
+                  href="/profile"
+                  className="flex items-center px-4 py-2 text-black hover:bg-gray-100"
+                  onClick={closeAllDropdowns}
+                >
+                  <CgProfile size={20} className="mr-2" />
+                  Profil Saya
+                </Link>
+                <Link
+                  href="/riwayat"
+                  className="flex items-center px-4 py-2 text-black hover:bg-gray-100"
+                  onClick={closeAllDropdowns}
+                >
+                  <MdHistory size={24} className="mr-2" />
+                  Riwayat
+                </Link>
+                <Link
+                  href="/bookmark"
+                  className="flex items-center px-4 py-2 text-black hover:bg-gray-100"
+                  onClick={closeAllDropdowns}
+                >
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 3v18l7-7 7 7V3z"
+                    ></path>
+                  </svg>
+                  Bookmark
+                </Link>
+                <Link
+                  href="/pengaturan"
+                  className="flex items-center px-4 py-2 text-black hover:bg-gray-100"
+                  onClick={closeAllDropdowns}
+                >
+                  <IoSettingsOutline size={20} className="mr-2" />
+                  Pengaturan
+                </Link>
+                <button
+                  onClick={() => {
+                    removeToken();
+                    closeAllDropdowns();
+                  }}
+                  className="flex items-center px-4 py-2 text-red-600 hover:bg-red-100 w-full"
+                >
+                  <LuLogOut size={20} className="mr-2 border-red-600" />
+                  Keluar
+                </button>
+              </div>
+            )}
+          </li>
+        ) : (
+          <>
+            <li>
+              <Link
+                href="/masuk"
+                className="border border-agro-light-yellow text-white px-4 py-2 rounded-lg"
+              >
+                Masuk
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/daftar"
+                className="bg-agro-light-yellow text-black px-4 py-2 rounded-lg"
+              >
+                Daftar
+              </Link>
+            </li>
+          </>
+        )}
+      </ul>
+
+      {/* Mobile Menu Button */}
+      <div className="md:hidden flex items-center">
+        <button onClick={toggleMenu} className="text-gray-800 focus:outline-none">
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="absolute top-full left-0 w-full bg-agro-green shadow-lg">
+          <ul className="flex flex-col space-y-4 py-4 px-6 text-white text-sm font-light">
+            <li>
+              <Link
+                href="/"
+                className={`${isActive("/") ? "font-semibold underline underline-offset-8" : ""}`}
+                onClick={handleMenuItemClick}
+              >
+                Beranda
+              </Link>
+            </li>
+            <li>
+              <button
+                onClick={toggleDropdown}
+                className="flex items-center justify-between w-full hover:text-primary"
+              >
+                Deteksi
+                <svg
+                  className={`w-4 h-4 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+              {isDropdownOpen && (
+                <div className="mt-2 ml-4">
+                  <Link
+                    href="/deteksi/jenis-tanaman"
+                    className="block px-4 py-2 text-white"
+                    onClick={() => {
+                      closeDropdown();
+                      handleMenuItemClick();
+                    }}
+                  >
+                    Jenis Tanaman
+                  </Link>
+                  <Link
+                    href="/deteksi/penyakit-tanaman"
+                    className="block px-4 py-2 text-white"
+                    onClick={() => {
+                      closeDropdown();
+                      handleMenuItemClick();
+                    }}
+                  >
+                    Penyakit Tanaman
+                  </Link>
+                </div>
+              )}
+            </li>
+            <li>
+              <Link
+                href="/diskusi"
+                className={`${isActive("/diskusi") ? "font-semibold underline underline-offset-8" : ""}`}
+                onClick={handleMenuItemClick}
+              >
+                Diskusi
+              </Link>
+            </li>
+
+            {isClient && isAuthenticated() ? (
+              <>
+                <li className="flex items-center space-x-4">
+                  {/* Icon Notifikasi */}
+                  <button className="text-white">
+                    Notifikasi
+                  </button>
+                </li>
+
+                <li>
+                  <Link
+                    href="/profile"
+                    className="text-white"
+                    onClick={handleMenuItemClick}
+                  >
+                    Profil Saya
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/riwayat"
+                    className="text-white"
+                    onClick={handleMenuItemClick}
+                  >
+                    Riwayat
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/bookmark"
+                    className="text-white"
+                    onClick={handleMenuItemClick}
+                  >
+                    Bookmark
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/pengaturan"
+                    className="text-white"
+                    onClick={handleMenuItemClick}
+                  >
+                    Pengaturan
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      removeToken();
+                      handleMenuItemClick();
+                    }}
+                    className="text-red-600"
+                  >
+                    Keluar
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    href="/masuk"
+                    className="border border-agro-light-yellow text-white px-40 py-2"
+                    onClick={handleMenuItemClick}
+                  >
+                    Masuk
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/daftar"
+                    className="bg-agro-light-yellow border border-agro-light-yellow text-black px-40 py-2"
+                    onClick={handleMenuItemClick}
+                  >
+                    Daftar
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+      )}
     </nav>
   );
 }
