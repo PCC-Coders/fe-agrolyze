@@ -4,7 +4,7 @@ const data = [
         username: "John Doe",
         timeAgo: "2h",
         text: "This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.This is a sample discussion post.",
-        postImage: "/images/sample_diskusi.png",
+        postImage: "/images/apel.png",
         likes: 12,
         comments: 4,
     },

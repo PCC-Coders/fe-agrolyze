@@ -16,10 +16,10 @@ const HeroSection = () => {
       <div className='lg:text-center drop-shadow-2xl absolute w-full translate-x-[-50%] translate-y-[-50%] top-[40%] left-[50%] px-4'>
         <p className='text-white '>Original & Natural</p>
         <h3 className='text-agro-light-yellow text-3xl lg:text-6xl font-bold'>
-          Health Plant
+          Cerdas Bertani
         </h3>
         <h3 className='text-white text-3xl lg:text-6xl font-bold'>
-          Health Food
+          Panen Berarti
         </h3>
         <p className='text-white'>
           <span className='font-semibold'>
