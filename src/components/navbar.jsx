@@ -235,7 +235,8 @@ export default function Navbar() {
                   <IoSettingsOutline size={20} className="mr-2" />
                   Pengaturan
                 </Link>
-                <button
+                <Link
+                  href="/"
                   onClick={() => {
                     removeToken();
                     closeAllDropdowns();
@@ -244,7 +245,7 @@ export default function Navbar() {
                 >
                   <LuLogOut size={20} className="mr-2 border-red-600" />
                   Keluar
-                </button>
+                </Link>
               </div>
             )}
           </li>
@@ -400,7 +401,8 @@ export default function Navbar() {
                   </Link>
                 </li>
                 <li>
-                  <button
+                  <Link
+                    href="/"
                     onClick={() => {
                       removeToken();
                       handleMenuItemClick();
@@ -408,7 +410,7 @@ export default function Navbar() {
                     className="text-red-600"
                   >
                     Keluar
-                  </button>
+                  </Link>
                 </li>
               </>
             ) : (
