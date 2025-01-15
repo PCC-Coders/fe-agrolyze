@@ -37,13 +37,10 @@ const PenyakitTanaman = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/plant/disease/user",
+        "http://127.0.0.1:8000/api/plant/disease/guest",
         {
           method: "POST",
           body: formData,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
         }
       );
 

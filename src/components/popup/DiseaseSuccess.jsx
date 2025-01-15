@@ -9,7 +9,7 @@ const DiseaseSuccessModal = ({isOpen, message, onClose, data}) => {
       onClick={onClose}
     >
       <div
-        className='bg-white p-6 rounded-lg max-w-lg mx-auto'
+        className='bg-white p-6 rounded-lg w-1/2 mx-auto'
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className='text-center text-xl font-semibold text-green-600'>
@@ -38,7 +38,7 @@ const DiseaseSuccessModal = ({isOpen, message, onClose, data}) => {
                 <img
                   src={data.image}
                   alt={data.disease}
-                  className='w-full h-auto rounded-lg mt-2'
+                  className='w-[200px] h-[150px] rounded-lg mt-2'
                 />
               </div>
 
@@ -49,7 +49,7 @@ const DiseaseSuccessModal = ({isOpen, message, onClose, data}) => {
                 <img
                   src={data.similar_images}
                   alt='Gambar Serupa'
-                  className='w-full h-auto rounded-lg mt-2'
+                  className='w-[200px] h-[150px] rounded-lg mt-2'
                 />
               </div>
             </div>

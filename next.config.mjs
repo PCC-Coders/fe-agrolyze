@@ -9,6 +9,13 @@ const nextConfig = {
         pathname: "",
         search: "",
       },
+      {
+        protocol: "https",
+        hostname: "plant.id",
+        port: "",
+        pathname: "",
+        search: "",
+      },
     ],
   },
 };
