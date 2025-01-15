@@ -24,7 +24,7 @@ const ArticleItem = ({imageUrl, date, author, title, slug}) => {
           </div>
           <Link
             href={`/artikel/${slug}`}
-            className='w-96 overflow-hidden text-ellipsis'
+            className='w-64 overflow-hidden text-ellipsis'
           >
             <h3 className='text-xl font-bold truncate'>{title}</h3>
           </Link>
