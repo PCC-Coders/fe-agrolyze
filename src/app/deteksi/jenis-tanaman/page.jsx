@@ -37,7 +37,7 @@ const JenisTanaman = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/plant/identification/user",
+        `${process.env.NEXT_PUBLIC_API_URL}/plant/identification/user`,
         {
           method: "POST",
           body: formData,

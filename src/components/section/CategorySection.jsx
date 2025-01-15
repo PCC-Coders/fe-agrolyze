@@ -13,7 +13,7 @@ const CategorySection = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/master/post-category`
+          `${process.env.NEXT_PUBLIC_API_URL}/master/post-category`
         );
         const {data} = response.data;
         setCategories(data);

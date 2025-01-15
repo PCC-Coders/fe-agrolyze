@@ -18,7 +18,7 @@ export const removeToken = () => {
 
 export const getUserProfile = async () => {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/auth/profile`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/profile`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },

@@ -11,7 +11,7 @@ const ArticleSection = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/post`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post`);
         const {data} = await response.json();
         setArticle(data);
       } catch (error) {
@@ -33,7 +33,7 @@ const ArticleSection = () => {
   return (
     <section className='bg-agro-dark-green text-white '>
       <div className='p-8 lg:p-24 container mx-auto'>
-        <h2 className='text-2xl lg:text-3xl text-center mb-20 font-bold'>
+        <h2 className='text-2xl lg:text-3xl text-center mb-14 font-bold'>
           Berita & Artikel
         </h2>
         <ul className='grid lg:grid-cols-3 gap-8 items-center px-4'>
