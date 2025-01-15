@@ -35,7 +35,7 @@ const CategorySection = () => {
   }
 
   return (
-    <section className='bg-agro-light-green text-white relative py-4'>
+    <section className='bg-agro-light-green text-white relative py-4 md:py-0'>
       <div className='md:flex gap-8'>
         <Image src='/images/petani.png' alt='Petani' width={600} height={600} />
         <div>
