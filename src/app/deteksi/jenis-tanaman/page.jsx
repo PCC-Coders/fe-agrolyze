@@ -4,6 +4,7 @@ import {useState} from "react";
 import {getToken} from "@/lib/auth";
 import {FileInputFlowbite} from "@/components/atoms/flowbite/FileInput";
 import IdentificationSuccessModal from "@/components/popup/IdentificationSuccess";
+import {API_BASE_URL} from "@/lib/config";
 
 const JenisTanaman = () => {
   const [latitude, setLatitude] = useState("");
@@ -37,7 +38,7 @@ const JenisTanaman = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/plant/identification/user",
+        `${API_BASE_URL}/plant/identification/user`,
         {
           method: "POST",
           body: formData,

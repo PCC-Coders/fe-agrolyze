@@ -4,6 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import CategoryItem from "../atoms/CategoryItem";
+import {API_BASE_URL} from "@/lib/config";
 
 const CategorySection = () => {
   const [categories, setCategories] = useState([]);
@@ -13,7 +14,7 @@ const CategorySection = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/master/post-category`
+          `${API_BASE_URL}/master/post-category`
         );
         const {data} = response.data;
         setCategories(data);

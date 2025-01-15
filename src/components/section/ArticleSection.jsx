@@ -2,6 +2,7 @@
 
 import ArticleItem from "@/components/atoms/ArticleItem";
 import {articles} from "@/data";
+import {API_BASE_URL} from "@/lib/config";
 import {useEffect, useState} from "react";
 
 const ArticleSection = () => {
@@ -11,7 +12,7 @@ const ArticleSection = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/post`);
+        const response = await fetch(`${API_BASE_URL}/post`);
         const {data} = await response.json();
         setArticle(data);
       } catch (error) {

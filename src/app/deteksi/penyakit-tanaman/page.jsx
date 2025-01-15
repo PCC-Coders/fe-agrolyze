@@ -4,6 +4,7 @@ import {useState} from "react";
 import {getToken} from "@/lib/auth";
 import {FileInputFlowbite} from "@/components/atoms/flowbite/FileInput";
 import DiseaseSuccessModal from "@/components/popup/DiseaseSuccess";
+import {API_BASE_URL} from "@/lib/config";
 
 const PenyakitTanaman = () => {
   const [latitude, setLatitude] = useState("");
@@ -36,13 +37,10 @@ const PenyakitTanaman = () => {
     }
 
     try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/plant/disease/guest",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/plant/disease/guest`, {
+        method: "POST",
+        body: formData,
+      });
 
       const result = await response.json();
 

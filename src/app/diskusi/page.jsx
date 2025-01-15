@@ -5,17 +5,17 @@ import CardDiscussion from "@/components/discussion/card/Card";
 import CategoryItem from "@/components/atoms/CategoryItem";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {API_BASE_URL} from "@/lib/config";
 
 export default function Diskusi() {
   const [categories, setCategories] = useState([]);
-
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/master/post-category`
+          `${API_BASE_URL}/master/post-category`
         );
         const {data} = response.data;
         setCategories(data);
