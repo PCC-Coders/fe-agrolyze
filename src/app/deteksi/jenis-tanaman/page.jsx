@@ -38,13 +38,10 @@ const JenisTanaman = () => {
 
     try {
       const response = await fetch(
-        `${API_BASE_URL}/plant/identification/user`,
+        `${API_BASE_URL}/plant/identification/guest`,
         {
           method: "POST",
           body: formData,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
         }
       );
 
