@@ -1,6 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 
-const ArticleItem = ({imageUrl, date, author, title}) => {
+const ArticleItem = ({imageUrl, date, author, title, slug}) => {
   return (
     <li>
       <div className='bg-agro-green rounded-lg'>
@@ -21,7 +22,12 @@ const ArticleItem = ({imageUrl, date, author, title}) => {
             <p>By {author}</p>
             <p>2 Comments</p>
           </div>
-          <h3 className='text-xl font-bold'>{title}</h3>
+          <Link
+            href={`/artikel/${slug}`}
+            className='w-96 overflow-hidden text-ellipsis'
+          >
+            <h3 className='text-xl font-bold truncate'>{title}</h3>
+          </Link>
         </div>
       </div>
     </li>

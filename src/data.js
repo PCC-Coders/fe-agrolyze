@@ -50,24 +50,57 @@ export const tutorials = [
 export const articles = [
   {
     imageUrl: "/images/padi.png",
-    author: "Kevin Martin",
+    author: "Sucipto",
     date: "3 Sep, 2024",
-    title:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis dignissimos voluptatum facilis nihil, consequatur alias provident blanditiis voluptates nisi quis?",
+    title: "Tanaman Pangan: Kunci Keberlanjutan Pangan Dunia",
+    slug: "tanaman-pangan-kunci-keberlanjutan-pangan-dunia",
+    content: `Tanaman pangan adalah salah satu komponen paling penting dalam sistem pertanian dunia. Mereka adalah sumber utama makanan bagi manusia dan hewan, serta mendukung ketahanan pangan global. Di antara tanaman pangan yang paling dikenal adalah padi, jagung, gandum, dan kentang, yang telah menjadi bagian tak terpisahkan dari pola makan banyak negara.
+Seiring bertambahnya jumlah penduduk dunia, kebutuhan akan tanaman pangan yang dapat memenuhi permintaan makanan semakin meningkat. Oleh karena itu, inovasi dalam pertanian, seperti pemuliaan tanaman untuk menghasilkan varietas yang lebih tahan terhadap hama dan perubahan iklim, serta penggunaan teknik pertanian yang ramah lingkungan, menjadi semakin penting.
+Tanaman pangan juga memiliki peran vital dalam mendukung ekonomi negara, menciptakan lapangan pekerjaan di sektor pertanian, dan mengurangi ketergantungan pada impor pangan. Namun, tantangan besar seperti perubahan iklim dan degradasi tanah mengharuskan kita untuk mencari solusi yang lebih berkelanjutan dalam mengelola sumber daya alam.`,
   },
   {
     imageUrl: "/images/padi.png",
     author: "Kevin Martin",
-    date: "3 Sep, 2024",
+    date: "6 Sep, 2024",
     title:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis dignissimos voluptatum facilis nihil, consequatur alias provident blanditiis voluptates nisi quis?",
+      "Mengenal Tanaman Hortikultura: Keindahan dan Manfaatnya untuk Kehidupan Sehari-hari",
+    slug: "mengenal-tanaman-hortikultura-keindahan-dan-manfaatnya-untuk-kehidupan-sehari-hari",
+    content: `Tanaman hortikultura mencakup berbagai jenis tanaman yang ditanam untuk tujuan konsumsi manusia, keindahan, atau penggunaan lainnya. Kelompok tanaman ini terdiri dari buah-buahan, sayuran, bunga, tanaman obat, dan tanaman hias lainnya.
+Hortikultura memiliki banyak manfaat untuk kehidupan sehari-hari. Dari sisi gizi, sayuran dan buah-buahan hortikultura menyediakan sumber vitamin, mineral, dan serat yang penting untuk kesehatan tubuh. Tanaman bunga dan tanaman hias, di sisi lain, berfungsi untuk mempercantik lingkungan, meningkatkan kualitas udara, dan memberikan ketenangan batin bagi orang-orang yang merawatnya.
+Selain itu, sektor hortikultura juga memberikan kontribusi signifikan terhadap perekonomian dengan menciptakan peluang bisnis bagi petani, pengusaha, dan industri pengolahan makanan. Oleh karena itu, keberadaan hortikultura tidak hanya memberi manfaat estetika, tetapi juga berfungsi sebagai pendorong ekonomi yang penting.`,
   },
   {
     imageUrl: "/images/padi.png",
-    author: "Kevin Martin",
-    date: "3 Sep, 2024",
+    author: "Raihan",
+    date: "7 Sep, 2024",
     title:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis dignissimos voluptatum facilis nihil, consequatur alias provident blanditiis voluptates nisi quis?",
+      "Perkebunan Berkelanjutan: Cara Mengelola Tanaman Perkebunan untuk Meningkatkan Produktivitas",
+    slug: "perkebunan-berkelanjutan-cara-mengelola-tanaman-perkebunan-untuk-meningkatkan-produktivitas",
+    content: `Perkebunan berkelanjutan adalah pendekatan dalam mengelola tanaman perkebunan yang tidak hanya berfokus pada peningkatan hasil produksi, tetapi juga memperhatikan keseimbangan ekologis, sosial, dan ekonomi. Tanaman perkebunan seperti kelapa sawit, kopi, teh, kakao, dan karet sering kali menjadi komoditas utama di banyak negara tropis, termasuk Indonesia.
+Namun, pertumbuhan pesat sektor perkebunan seringkali menimbulkan dampak negatif terhadap lingkungan, seperti deforestasi dan polusi tanah dan air. Oleh karena itu, penting untuk menerapkan prinsip-prinsip pertanian berkelanjutan yang mengutamakan konservasi alam, penggunaan pestisida ramah lingkungan, serta pemberdayaan masyarakat lokal dalam pengelolaan perkebunan.
+Dengan penerapan teknik-teknik seperti rotasi tanaman, agroforestry (pertanian berkelanjutan dengan pohon), dan manajemen sumber daya alam yang bijaksana, kita dapat memastikan keberlanjutan perkebunan sekaligus meningkatkan hasil produksi dalam jangka panjang.`,
+  },
+  {
+    imageUrl: "/images/padi.png",
+    author: "Keihin",
+    date: "7 Sep, 2024",
+    title:
+      "Tanaman Hias: Menambah Keceriaan Rumah dengan Pilihan Tanaman yang Tepat",
+    slug: "tanaman-hias-menambah-keceriaan-rumah-dengan-pilihan-tanaman-yang-tepat",
+    content: `Tanaman hias tidak hanya memperindah ruangan, tetapi juga memberikan berbagai manfaat bagi kesehatan dan kualitas udara di dalam rumah. Tanaman seperti monstera, aloe vera, spider plant, dan peace lily populer di kalangan penggemar tanaman hias karena keindahannya dan kemudahan dalam perawatannya.
+Selain fungsi estetika, tanaman hias juga dikenal memiliki kemampuan untuk menyaring polutan udara dan meningkatkan kelembaban ruangan. Beberapa tanaman bahkan dipercaya dapat mengurangi stres dan meningkatkan mood. Misalnya, tanaman lavender dikenal memiliki aroma yang menenangkan, sedangkan tanaman sukulen dapat memberikan kesan alami dan menenangkan di ruang tamu atau meja kerja.
+Memilih tanaman hias yang tepat untuk rumah Anda tidak hanya tergantung pada preferensi visual, tetapi juga pada faktor lingkungan, seperti pencahayaan dan kelembaban ruangan. Dengan merawat tanaman hias dengan baik, Anda dapat menikmati manfaat jangka panjang dari kehadirannya.`,
+  },
+  {
+    imageUrl: "/images/padi.png",
+    author: "Kuncoro",
+    date: "28 Sep, 2024",
+    title: "Manfaat Tanaman Obat: Rahasia Alam untuk Kesehatan yang Lebih Baik",
+    slug: "manfaat-tanaman-obat-rahasia-alam-untuk-kesehatan-yang-lebih-baik",
+    content: `Tanaman obat telah digunakan sejak zaman dahulu sebagai pengobatan alami untuk berbagai penyakit dan keluhan kesehatan. Berbagai tanaman obat, seperti jahe, kunyit, temulawak, dan daun sirsak, diketahui memiliki kandungan senyawa aktif yang dapat meningkatkan daya tahan tubuh, mengurangi peradangan, dan membantu proses penyembuhan.
+Jahe, misalnya, telah lama dikenal untuk mengatasi gangguan pencernaan, mual, dan masalah pernapasan. Kunyit, yang mengandung kurkumin, memiliki efek antiinflamasi yang sangat kuat, menjadikannya pilihan populer dalam pengobatan tradisional. Begitu pula dengan temulawak yang digunakan untuk menjaga kesehatan hati dan memperlancar pencernaan.
+Keberadaan tanaman obat tidak hanya bermanfaat dalam pengobatan herbal, tetapi juga dapat meningkatkan kesadaran akan pentingnya pengobatan alami yang lebih terjangkau dan minim efek samping. Oleh karena itu, menanam tanaman obat di rumah bisa menjadi langkah yang baik untuk menjaga kesehatan secara alami dan mandiri.
+`,
   },
 ];
 

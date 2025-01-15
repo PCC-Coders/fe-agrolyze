@@ -13,7 +13,7 @@ const CategorySection = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          `https://smartagro-api.sightway.my.id/api/master/post-category`
+          `http://127.0.0.1:8000/api/master/post-category`
         );
         const {data} = response.data;
         setCategories(data);
@@ -26,7 +26,11 @@ const CategorySection = () => {
   }, []);
 
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <div className='p-8 bg-agro-dark-green text-white'>
+        <p className='text-center text-lg font-semibold '>{error}</p>
+      </div>
+    );
   }
 
   return (
