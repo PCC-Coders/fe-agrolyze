@@ -1,11 +1,9 @@
 "use client";
 
 import {useState} from "react";
-import SuccessModal from "@/components/popup/IdentificationSuccess";
 import {getToken} from "@/lib/auth";
 import {FileInputFlowbite} from "@/components/atoms/flowbite/FileInput";
-import {Label} from "flowbite-react";
-import {LuCloudUpload} from "react-icons/lu";
+import IdentificationSuccessModal from "@/components/popup/IdentificationSuccess";
 
 const JenisTanaman = () => {
   const [latitude, setLatitude] = useState("");
@@ -111,7 +109,7 @@ const JenisTanaman = () => {
         </div>
       </div>
 
-      <SuccessModal
+      <IdentificationSuccessModal
         isOpen={isModalOpen}
         message={popupMessage}
         onClose={closeModal}

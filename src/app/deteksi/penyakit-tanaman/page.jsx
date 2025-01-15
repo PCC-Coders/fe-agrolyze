@@ -1,11 +1,9 @@
 "use client";
 
 import {useState} from "react";
-import SuccessModal from "@/components/popup/IdentificationSuccess";
 import {getToken} from "@/lib/auth";
 import {FileInputFlowbite} from "@/components/atoms/flowbite/FileInput";
-import {Label} from "flowbite-react";
-import {LuCloudUpload} from "react-icons/lu";
+import DiseaseSuccessModal from "@/components/popup/DiseaseSuccess";
 
 const PenyakitTanaman = () => {
   const [latitude, setLatitude] = useState("");
@@ -115,7 +113,7 @@ const PenyakitTanaman = () => {
         </div>
       </div>
 
-      <SuccessModal
+      <DiseaseSuccessModal
         isOpen={isModalOpen}
         message={popupMessage}
         onClose={closeModal}

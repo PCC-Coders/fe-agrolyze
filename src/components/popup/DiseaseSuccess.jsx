@@ -1,6 +1,6 @@
 import React from "react";
 
-const IdentificationSuccessModal = ({isOpen, message, onClose, data}) => {
+const DiseaseSuccessModal = ({isOpen, message, onClose, data}) => {
   if (!isOpen) return null;
 
   return (
@@ -18,8 +18,10 @@ const IdentificationSuccessModal = ({isOpen, message, onClose, data}) => {
 
         {data && (
           <div className='mt-4'>
-            <h4 className='text-lg font-bold text-gray-800'>Nama Tanaman:</h4>
-            <p className='text-sm text-gray-600'>{data.plant_name}</p>
+            <h4 className='text-lg font-bold text-gray-800'>
+              Penyakit Tanaman:
+            </h4>
+            <p className='text-sm text-gray-600'>{data.disease}</p>
 
             <h4 className='text-lg font-bold text-gray-800 mt-4'>
               Probabilitas:
@@ -35,7 +37,7 @@ const IdentificationSuccessModal = ({isOpen, message, onClose, data}) => {
                 </h4>
                 <img
                   src={data.image}
-                  alt={data.plant_name}
+                  alt={data.disease}
                   className='w-full h-auto rounded-lg mt-2'
                 />
               </div>
@@ -51,6 +53,24 @@ const IdentificationSuccessModal = ({isOpen, message, onClose, data}) => {
                 />
               </div>
             </div>
+
+            <h4 className='text-lg font-bold text-gray-800 mt-4'>
+              Pengobatan:
+            </h4>
+            <div className='text-sm text-gray-600'>
+              <p>
+                <strong>Pengobatan Kimia:</strong>{" "}
+                {data.treatment_id.chemical_treatment}
+              </p>
+              <p>
+                <strong>Pengobatan Biologis:</strong>{" "}
+                {data.treatment_id.biological_treatment}
+              </p>
+              <p>
+                <strong>Prevensi:</strong>{" "}
+                {data.treatment_id.prevention_treatment}
+              </p>
+            </div>
           </div>
         )}
 
@@ -65,4 +85,4 @@ const IdentificationSuccessModal = ({isOpen, message, onClose, data}) => {
   );
 };
 
-export default IdentificationSuccessModal;
+export default DiseaseSuccessModal;
