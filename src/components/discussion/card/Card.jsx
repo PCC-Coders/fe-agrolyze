@@ -11,7 +11,7 @@ export default function CardDiscussion() {
   useEffect(() => {
     const fetchDiscussion = async () => {
       try {
-        const response = await axios.get(`NEXT_PUBLIC_API_URL/discusses`);
+        const response = await axios.get(`http://127.0.0.1:8000/api/discusses`);
         const {data} = await response.json();
         setDiscusses(data);
       } catch (error) {
