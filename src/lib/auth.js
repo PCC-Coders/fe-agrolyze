@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import {API_BASE_URL} from "./config";
+import {API_BASE_URL, API_DEV_URL} from "./config";
 
 export const setToken = (token) => {
   Cookies.set("token", token, {expires: 7}); // Token disimpan di cookie selama 7 hari
@@ -19,7 +19,7 @@ export const removeToken = () => {
 
 export const getUserProfile = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+    const response = await fetch(`${API_DEV_URL}/auth/profile`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
