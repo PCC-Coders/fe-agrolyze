@@ -7,6 +7,7 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     flowbite.content(),
+    "./node_modules/flowbite/**/*.js",
   ],
   theme: {
     extend: {
@@ -24,5 +25,6 @@ export default {
       },
     },
   },
-  plugins: [flowbite.plugin()],
+  plugins: [flowbite.plugin(), require("flowbite/plugin")],
+  darkMode: "media",
 };
