@@ -8,7 +8,7 @@ const FeatureSection = () => {
         <h2 className='text-2xl lg:text-3xl text-center mb-20 font-bold'>
           <span className='text-agro-yellow'>Kenapa</span> Pilih Agrolyze?
         </h2>
-        <ul className='grid lg:grid-cols-3 gap-4 lg:gap-12 items-center'>
+        <ul className='grid md:grid-cols-3 gap-4 lg:gap-12 items-center'>
           {features.map((feature, index) => (
             <FeatureItem key={index} {...feature} />
           ))}

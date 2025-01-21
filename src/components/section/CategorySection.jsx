@@ -4,7 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import CategoryItem from "../atoms/CategoryItem";
-import {API_BASE_URL} from "@/lib/config";
+import {API_BASE_URL, API_DEV_URL} from "@/lib/config";
 
 const CategorySection = () => {
   const [categories, setCategories] = useState([]);
@@ -13,9 +13,7 @@ const CategorySection = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(
-          `${API_BASE_URL}/master/post-category`
-        );
+        const response = await axios.get(`${API_DEV_URL}/master/post-category`);
         const {data} = response.data;
         setCategories(data);
       } catch (err) {
@@ -35,7 +33,7 @@ const CategorySection = () => {
   }
 
   return (
-    <section className='bg-agro-light-green text-white relative py-4 md:py-0'>
+    <section className='bg-agro-light-green text-white relative pb-8 md:pb-0'>
       <div className='md:flex gap-8'>
         <Image src='/images/petani.png' alt='Petani' width={600} height={600} />
         <div>
@@ -43,7 +41,7 @@ const CategorySection = () => {
             <span className='text-agro-yellow'>Kategori</span> Tanaman di
             Indonesia
           </h2>
-          <ul className='grid md:grid-cols-2 gap-8 items-center px-6 md:px-0'>
+          <ul className='grid lg:grid-cols-2 gap-8 items-center px-6 md:px-0'>
             {categories.map((category) => (
               <CategoryItem key={category.name} {...category} />
             ))}

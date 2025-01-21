@@ -14,7 +14,6 @@ import {CgProfile} from "react-icons/cg";
 import {MdHistory} from "react-icons/md";
 import {IoSettingsOutline} from "react-icons/io5";
 import {LuLogOut} from "react-icons/lu";
-import axios from "axios";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -24,6 +23,7 @@ export default function Navbar() {
   const [isDeteksiDropdownOpen, setIsDeteksiDropdownOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [isClient, setIsClient] = useState(false);
+  const token = getToken();
 
   const isActive = (href) => pathname === href;
 
@@ -53,27 +53,22 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (isClient) {
-      const token = getToken();
-
-      if (token) {
-        getUserProfile()
-          .then((data) => {
-            setUser(data);
-          })
-          .catch((err) => {
-            console.error("Error fetching user profile:", err);
-            setUser({name: "User"});
-          });
-      } else {
-        setUser({name: "User"});
-      }
+    if (token && isClient) {
+      getUserProfile()
+        .then((data) => {
+          setUser(data);
+        })
+        .catch((err) => {
+          console.error("Error fetching user profile:", err);
+          setUser(null);
+        });
+    } else {
+      setUser(null);
     }
-  }, [isClient]);
+  }, [isClient, token]);
 
   return (
     <nav className='flex justify-between items-center py-4 px-6 md:px-8 lg:px-12 bg-agro-green shadow-lg text-m sticky top-0 z-50'>
-      {/* Logo */}
       <div className='text-m font-bold ml-4 lg:ml-8'>
         <Link href='/'>
           <Image
@@ -176,59 +171,44 @@ export default function Navbar() {
         </li>
         {isClient && isAuthenticated() ? (
           <li className='flex items-center space-x-4'>
-            {/* Icon Notifikasi */}
-            <button className='text-white'>
-              <svg
-                className='w-6 h-6'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9'
-                ></path>
-              </svg>
-            </button>
-
-            {/* Foto Profil dan Nama */}
             <div
               onClick={toggleUserDropdown}
-              className='flex items-center bg-agro-light-yellow px-4 py-2 rounded-lg cursor-pointer'
+              className='flex items-center bg-agro-light-yellow w-[200px] px-4 py-2 rounded-lg cursor-pointer'
             >
-              <Image
-                src='/images/foto_profil.svg'
-                alt='Profile'
-                width={30}
-                height={30}
-                className='rounded-full'
-              />
-              <span className='ml-2 text-black'>{user?.name || "User"}</span>
-              <svg
-                className={`ml-2 w-4 h-4 transition-transform ${
-                  isUserDropdownOpen ? "rotate-180" : ""
-                }`}
-                fill='none'
-                stroke='black'
-                strokeWidth='2'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M6 9l6 6 6-6'
-                ></path>
-              </svg>
+              <div className='mx-auto flex items-center'>
+                <Image
+                  src='/images/foto_profil.svg'
+                  alt='Profile'
+                  width={30}
+                  height={30}
+                  className='rounded-full'
+                />
+                <span className='ml-2 text-black'>
+                  {user?.name?.substring(0, 10)}
+                </span>
+                <svg
+                  className={`ml-2 w-4 h-4 transition-transform ${
+                    isUserDropdownOpen ? "rotate-180" : ""
+                  }`}
+                  fill='none'
+                  stroke='black'
+                  strokeWidth='2'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M6 9l6 6 6-6'
+                  ></path>
+                </svg>
+              </div>
             </div>
 
             {/* Dropdown Menu */}
             {isUserDropdownOpen && (
               <div
-                className='absolute right-0 mt-2 w-48 bg-white border shadow-lg rounded-lg'
+                className='absolute right-0 mt-2 w-[200px] bg-white border shadow-lg rounded-lg'
                 style={{top: "calc(100% + 1px)"}}
               >
                 <Link
@@ -314,10 +294,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Button */}
       <div className='md:hidden flex items-center'>
-        <button
-          onClick={toggleMenu}
-          className='text-gray-800 focus:outline-none'
-        >
+        <button onClick={toggleMenu} className='text-white focus:outline-none'>
           <svg
             className='w-6 h-6'
             fill='none'
@@ -475,7 +452,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href='/masuk'
-                    className='border border-agro-light-yellow text-white px-40 py-2'
+                    className='border border-agro-light-yellow text-white w-full block p-4 text-center py-2'
                     onClick={handleMenuItemClick}
                   >
                     Masuk
@@ -484,7 +461,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href='/daftar'
-                    className='bg-agro-light-yellow border border-agro-light-yellow text-black px-40 py-2'
+                    className='bg-agro-light-yellow border border-agro-light-yellow text-black w-full block p-4 text-center py-2'
                     onClick={handleMenuItemClick}
                   >
                     Daftar

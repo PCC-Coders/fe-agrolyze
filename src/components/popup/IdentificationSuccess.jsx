@@ -1,11 +1,12 @@
+import Image from "next/image";
 import React from "react";
 
-const IdentificationSuccessModal = ({isOpen, message, onClose, data}) => {
+const IdentificationSuccessModal = ({isOpen, onClose, data}) => {
   if (!isOpen) return null;
 
   return (
     <div
-      className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'
+      className='fixed p-2 h-auto overflow-auto inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'
       onClick={onClose}
     >
       <div
@@ -13,13 +14,13 @@ const IdentificationSuccessModal = ({isOpen, message, onClose, data}) => {
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className='text-center text-xl font-semibold text-green-600'>
-          {message || "Identifikasi Tanaman berhasil!"}
+          {"Identifikasi Informasi Tanaman berhasil!"}
         </h3>
 
         {data && (
           <div className='mt-4'>
             <h4 className='text-lg font-bold text-gray-800'>Nama Tanaman:</h4>
-            <p className='text-sm text-gray-600'>{data.plant_name}</p>
+            <p className='text-sm text-gray-600'>{data.name}</p>
 
             <h4 className='text-lg font-bold text-gray-800 mt-4'>
               Probabilitas:
@@ -28,15 +29,17 @@ const IdentificationSuccessModal = ({isOpen, message, onClose, data}) => {
               {(data.probability * 100).toFixed(2)}%
             </p>
 
-            <div className='flex gap-4'>
+            <div className='flex flex-col md:flex-row gap-0 md:gap-4'>
               <div className='mt-4'>
                 <h4 className='text-lg font-bold text-gray-800'>
                   Gambar Tanaman:
                 </h4>
-                <img
+                <Image
                   src={data.image}
-                  alt={data.plant_name}
-                  className='w-full h-auto rounded-lg mt-2'
+                  alt={data.name}
+                  width={400}
+                  height={400}
+                  className='w-full h-[100px] md:h-[200px] object-cover rounded-lg mt-2'
                 />
               </div>
 
@@ -44,12 +47,20 @@ const IdentificationSuccessModal = ({isOpen, message, onClose, data}) => {
                 <h4 className='text-lg font-bold text-gray-800'>
                   Gambar Serupa:
                 </h4>
-                <img
+                <Image
                   src={data.similar_images}
                   alt='Gambar Serupa'
-                  className='w-full h-auto rounded-lg mt-2'
+                  width={400}
+                  height={400}
+                  className='w-full h-[100px] md:h-[200px] object-cover rounded-lg mt-2'
                 />
               </div>
+            </div>
+            <div className='grid'>
+              <h4 className='text-lg font-bold text-gray-800 mt-4'>
+                Penjelasan:
+              </h4>
+              <p className='text-sm text-gray-600'>{data.explanation}</p>
             </div>
           </div>
         )}

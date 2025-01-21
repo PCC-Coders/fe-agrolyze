@@ -1,6 +1,6 @@
 import React from "react";
 
-const DiseaseSuccessModal = ({isOpen, message, onClose, data}) => {
+const DiseaseSuccessModal = ({isOpen, onClose, data}) => {
   if (!isOpen) return null;
 
   return (
@@ -13,7 +13,7 @@ const DiseaseSuccessModal = ({isOpen, message, onClose, data}) => {
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className='text-center text-xl font-semibold text-green-600'>
-          {message || "Identifikasi Tanaman berhasil!"}
+          {"Identifikasi Penyakit Tanaman berhasil!"}
         </h3>
 
         {data && (
