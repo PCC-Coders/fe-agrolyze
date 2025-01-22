@@ -82,7 +82,7 @@ export default function Articles({initialArticles = []}) {
           )}
         </div>
 
-        <div className=' flex overflow-x-auto sm:justify-center'>
+        <div className='grid overflow-x-auto mx-auto justify-center'>
           <Pagination
             currentPage={currentPage}
             totalPages={100}
