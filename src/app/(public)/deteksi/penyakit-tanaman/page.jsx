@@ -12,6 +12,7 @@ const PenyakitTanaman = () => {
   const [loading, setLoading] = useState(false);
   const [identificationData, setIdentificationData] = useState(null);
   const token = getToken();
+  console.log(token);
 
   const [file, setFile] = useState(null);
 
@@ -21,8 +22,6 @@ const PenyakitTanaman = () => {
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  console.log(`${API_DEV_URL}/plant/disease/guest`);
 
   const handlePostIdentification = async () => {
     setLoading(true);
@@ -34,14 +33,22 @@ const PenyakitTanaman = () => {
     formData.append("address", address);
 
     try {
-      const userOrGuestApiUrl = token
-        ? "plant/disease/user"
-        : "plant/disease/guest";
+      let response;
 
-      const response = await fetch(`${API_DEV_URL}/${userOrGuestApiUrl}`, {
-        method: "POST",
-        body: formData,
-      });
+      if (!token) {
+        response = await fetch(`${API_DEV_URL}/plant/disease/guest`, {
+          method: "POST",
+          body: formData,
+        });
+      } else {
+        response = await fetch(`${API_DEV_URL}/plant/disease/user`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
+      }
 
       const result = await response.json();
 
@@ -51,6 +58,8 @@ const PenyakitTanaman = () => {
         );
         setIsModalOpen(true);
         setIdentificationData(result.data);
+        setFile(null);
+        setAddress("");
       } else {
         setPopupMessage(
           result.message || "Gagal mengidentifikasi penyakit tanaman."

@@ -33,14 +33,22 @@ const JenisTanaman = () => {
     formData.append("address", address);
 
     try {
-      const userOrGuestApiUrl = token
-        ? "plant/identification/user"
-        : "plant/identification/guest";
+      let response;
 
-      const response = await fetch(`${API_DEV_URL}/${userOrGuestApiUrl}`, {
-        method: "POST",
-        body: formData,
-      });
+      if (!token) {
+        response = await fetch(`${API_DEV_URL}/plant/identification/guest`, {
+          method: "POST",
+          body: formData,
+        });
+      } else {
+        response = await fetch(`${API_DEV_URL}/plant/identification/user`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
+      }
 
       const result = await response.json();
 
@@ -48,6 +56,8 @@ const JenisTanaman = () => {
         setPopupMessage(result.message || "Identifikasi berhasil!");
         setIsModalOpen(true);
         setIdentificationData(result.data);
+        setAddress("");
+        setFile(null);
       } else {
         setPopupMessage(result.message || "Gagal mengidentifikasi tanaman.");
         setIsModalOpen(true);
