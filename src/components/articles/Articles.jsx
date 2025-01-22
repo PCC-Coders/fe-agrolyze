@@ -1,43 +1,39 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import { use, useEffect, useState } from "react";
 import ArticleItem from "@/components/atoms/ArticleItem";
-import {API_BASE_URL, API_DEV_URL} from "@/lib/config";
+import { API_BASE_URL, API_DEV_URL } from "@/lib/config";
 import Skeleton from "../atoms/flowbite/Skeleton";
-import {Pagination} from "flowbite-react";
+import PaginationFlowbite from "../atoms/flowbite/Pagination";
+import { Pagination } from "flowbite-react";
 
-export default function Articles({initialArticles = []}) {
+export default function Articles({ initialArticles = [], initialTotalPages = 1 }) {
   const [articles, setArticles] = useState(initialArticles);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [isClient, setIsClient] = useState(false);
-
   const [currentPage, setCurrentPage] = useState(1);
-
-  const onPageChange = (page) => setCurrentPage(page);
+  const [totalPages, setTotalPages] = useState(initialTotalPages);
 
   useEffect(() => {
-    if (initialArticles.length === 0) {
-      const fetchArticles = async () => {
-        try {
-          const response = await fetch(`${API_DEV_URL}/post`, {
-            cache: "no-store",
-          });
-          const {data} = await response.json();
-          setArticles(data.data || []);
-        } catch (error) {
-          console.error("Gagal mengambil data artikel:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
+    const fetchArticles = async (page) => {
+      setLoading(true);
+      try {
+        const response = await fetch(`${API_DEV_URL}/post?page=${page}`, {
+          cache: "no-store",
+        });
+        const { data } = await response.json();
+        setArticles(data.data || []);
+        setTotalPages(data.last_page || 1);
+      } catch (error) {
+        console.error("Gagal mengambil data artikel:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      fetchArticles();
-    } else {
-      setArticles(initialArticles);
-      setLoading(false);
-    }
-  }, [initialArticles]);
+    fetchArticles(currentPage);
+  }, [currentPage]);
 
   const filteredArticles = articles.filter((article) => {
     const title = article.title || "";
@@ -85,8 +81,8 @@ export default function Articles({initialArticles = []}) {
         <div className='grid overflow-x-auto mx-auto justify-center'>
           <Pagination
             currentPage={currentPage}
-            totalPages={100}
-            onPageChange={onPageChange}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
             showIcons
           />
         </div>
