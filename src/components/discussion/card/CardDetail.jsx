@@ -44,7 +44,6 @@ export default function CardDetail({
             newComment.comment &&
             newComment.created_at
           ) {
-            console.log("Adding new comment to the list");
             setCommentList((prev) => [
               {
                 id: newComment.id,
@@ -74,8 +73,6 @@ export default function CardDetail({
     setIsClient(true);
     setCommentList(discuss_comments || []);
   }, [discuss_comments]);
-
-  console.log("Comment List:", commentList);
 
   if (!isClient) return null;
 

@@ -12,7 +12,6 @@ const PenyakitTanaman = () => {
   const [loading, setLoading] = useState(false);
   const [identificationData, setIdentificationData] = useState(null);
   const token = getToken();
-  console.log(token);
 
   const [file, setFile] = useState(null);
 

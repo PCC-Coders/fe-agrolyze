@@ -58,8 +58,6 @@ export default function ProfilePage() {
     fetchData();
   }, [user, activeTab]);
 
-  console.log(comments);
-
   return (
     <div className='min-h-screen bg-green-900'>
       {/* Header */}

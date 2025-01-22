@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const PostProfile = ({imageUrl, user, title, content, slug}) => {
-  console.log(user);
   return (
     <li className='flex items-start bg-gray-200 rounded-lg p-4'>
       <Link href={`/diskusi/${slug}`} className='block ml-4 flex-1'>

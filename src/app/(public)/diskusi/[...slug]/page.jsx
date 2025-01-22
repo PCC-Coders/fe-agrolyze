@@ -4,7 +4,6 @@ import CardDetail from "@/components/discussion/card/CardDetail";
 
 const fetchDetailDiscusses = async (slug) => {
   const token = cookies().get("token")?.value; // Ambil token dari cookie
-  console.log("Token fetched from cookie:", token);
 
   if (!token) {
     throw new Error("Token not found!");
