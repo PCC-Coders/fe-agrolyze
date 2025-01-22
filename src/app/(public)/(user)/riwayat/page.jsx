@@ -37,8 +37,6 @@ export default function HistoryPage() {
     fetchHistory(category);
   }, [category]);
 
-  console.log(historyData);
-
   return (
     <div className='py-6 px-10 md:px-16 lg:px-20 bg-agro-green'>
       <Link href='/deteksi/jenis-tanaman'>

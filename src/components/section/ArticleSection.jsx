@@ -34,8 +34,6 @@ const ArticleSection = () => {
     );
   }
 
-  console.log(article);
-
   return (
     <section className='bg-agro-dark-green text-white py-10'>
       <div className='lg:p-24 container mx-auto'>

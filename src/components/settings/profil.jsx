@@ -26,8 +26,6 @@ export default function Profil() {
     }
   }, [isClient, token]);
 
-  console.log(user);
-
   const handleFotoUpload = (e) => {
     const file = e.target.files[0];
     if (file && file.size <= 2 * 1024 * 1024) {
