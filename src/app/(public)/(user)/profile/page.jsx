@@ -36,7 +36,7 @@ export default function ProfilePage() {
       const endpoint =
         activeTab === "posts"
           ? `${API_DEV_URL}/discusses/user/${user.id}?per_page=5`
-          : `${API_DEV_URL}/discusses/comments/user/${user.id}?per_page=5`;
+          : `${API_DEV_URL}/discusses/comments/user/${user.id}`;
 
       try {
         const response = await fetch(endpoint, {

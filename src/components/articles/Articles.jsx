@@ -1,10 +1,9 @@
 "use client";
 
-import {use, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import ArticleItem from "@/components/atoms/ArticleItem";
 import {API_BASE_URL, API_DEV_URL} from "@/lib/config";
 import Skeleton from "../atoms/flowbite/Skeleton";
-import PaginationFlowbite from "../atoms/flowbite/Pagination";
 import {Pagination} from "flowbite-react";
 
 export default function Articles({initialArticles = []}) {

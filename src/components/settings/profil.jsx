@@ -1,11 +1,9 @@
 import {useEffect, useState} from "react";
-import dataProfil from "./data";
 import Image from "next/image";
 import {getToken, getUserProfile} from "@/lib/auth";
 
 export default function Profil() {
   const [user, setUser] = useState(null);
-  const {tentangSaya, foto} = dataProfil;
   const [isClient, setIsClient] = useState(false);
   const token = getToken();
 
