@@ -1,13 +1,15 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import ArticleItem from "@/components/atoms/ArticleItem";
-import { API_BASE_URL, API_DEV_URL } from "@/lib/config";
+import {API_BASE_URL, API_DEV_URL} from "@/lib/config";
 import Skeleton from "../atoms/flowbite/Skeleton";
-import PaginationFlowbite from "../atoms/flowbite/Pagination";
-import { Pagination } from "flowbite-react";
+import {Pagination} from "flowbite-react";
 
-export default function Articles({ initialArticles = [], initialTotalPages = 1 }) {
+export default function Articles({
+  initialArticles = [],
+  initialTotalPages = 1,
+}) {
   const [articles, setArticles] = useState(initialArticles);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -22,7 +24,7 @@ export default function Articles({ initialArticles = [], initialTotalPages = 1 }
         const response = await fetch(`${API_DEV_URL}/post?page=${page}`, {
           cache: "no-store",
         });
-        const { data } = await response.json();
+        const {data} = await response.json();
         setArticles(data.data || []);
         setTotalPages(data.last_page || 1);
       } catch (error) {

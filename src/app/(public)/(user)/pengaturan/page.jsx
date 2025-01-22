@@ -1,14 +1,22 @@
 "use client";
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Image from "next/image";
 import Profil from "@/components/settings/profil";
 import GantiPassword from "@/components/settings/ganti-password";
 import BackButton from "@/components/riwayat/BackButton";
 import Title from "@/components/riwayat/Title";
+import Link from "next/link";
 
 export default function Pengaturan() {
   const [activeTab, setActiveTab] = useState("profil");
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
 
   return (
     <div className='min-h-screen bg-agro-green py-6 px-6 md:px-10 lg:px-16'>
@@ -47,16 +55,17 @@ export default function Pengaturan() {
                   ? "border-l-4 border-white text-white"
                   : "border-l-4 border-transparent text-white"
               }`}
-              onClick={() => setActiveTab("password")}
             >
-              <Image
-                src='/images/key.svg'
-                alt='Icon Password'
-                width={100}
-                height={100}
-                className='w-5 h-5 md:w-6 md:h-6 mr-2 ml-4'
-              />
-              Reset Password
+              <Link href='/forgot-password' className='flex items-center'>
+                <Image
+                  src='/images/key.svg'
+                  alt='Icon Password'
+                  width={100}
+                  height={100}
+                  className='w-5 h-5 md:w-6 md:h-6 mr-2 ml-4'
+                />
+                Reset Password
+              </Link>
             </li>
           </ul>
         </div>
@@ -64,12 +73,12 @@ export default function Pengaturan() {
         {/* Konten Utama */}
         <div className='md:w-3/4 bg-white p-6 rounded-lg shadow md:hidden'>
           {activeTab === "profil" && <Profil />}
-          {activeTab === "password" && <GantiPassword />}
+          {/* {activeTab === "password" && <GantiPassword />} */}
         </div>
 
         <div className='hidden md:block md:w-3/4 bg-white p-6 rounded-lg shadow'>
           {activeTab === "profil" && <Profil />}
-          {activeTab === "password" && <GantiPassword />}
+          {/* {activeTab === "password" && <GantiPassword />} */}
         </div>
       </div>
     </div>

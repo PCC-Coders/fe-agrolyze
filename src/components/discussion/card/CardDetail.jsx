@@ -38,6 +38,8 @@ export default function CardDetail({
         if (res.ok) {
           const {data: newComment} = await res.json();
 
+          window.location.reload();
+
           if (
             newComment &&
             newComment.id &&
