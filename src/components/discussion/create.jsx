@@ -130,7 +130,7 @@ export default function CreateDiscussion({onNewDiscussion}) {
       {imageUrl && (
         <div className='mt-4 relative'>
           <Image
-            src={`imageUrl`}
+            src={imageUrl}
             alt='Uploaded Preview'
             width={250}
             height={250}
