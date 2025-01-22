@@ -1,22 +1,22 @@
 import {PUBLIC_STORAGE_URL} from "@/lib/config";
+import {formattedDate} from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
-const ArticleItem = ({imageUrl, update_at, count, user, title, slug}) => {
+const ArticleItem = ({imageUrl, created_at, count, user, title, slug}) => {
   return (
     <li>
       <div className='bg-agro-green rounded-lg'>
         <div className='relative'>
           <Image
-            // src={`${PUBLIC_STORAGE_URL}/posts/${imageUrl}`}
-            src={"/images/padi.png"}
+            src={`${PUBLIC_STORAGE_URL}/uploads/posts/${imageUrl}`}
             alt={title}
-            width={100}
-            height={100}
+            width={1000}
+            height={1000}
             className='w-full h-[300px] rounded-t-lg object-cover'
           />
           <div className='bg-agro-light-yellow absolute bottom-0 right-0 p-2 rounded-tl-lg'>
-            <p className='text-agro-green'>{update_at}</p>
+            <p className='text-agro-green'>{formattedDate(created_at)}</p>
           </div>
         </div>
         <div className='grid gap-8 items-center p-4'>

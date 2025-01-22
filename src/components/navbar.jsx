@@ -56,7 +56,7 @@ export default function Navbar() {
     if (token && isClient) {
       getUserProfile()
         .then((data) => {
-          setUser(data);
+          setUser(data.data);
         })
         .catch((err) => {
           console.error("Error fetching user profile:", err);
@@ -177,11 +177,11 @@ export default function Navbar() {
             >
               <div className='mx-auto flex items-center'>
                 <Image
-                  src='/images/foto_profil.svg'
+                  src={user?.image || "/images/icon_profil.svg"}
                   alt='Profile'
                   width={30}
                   height={30}
-                  className='rounded-full'
+                  className='rounded-full w-auto  object-cover'
                 />
                 <span className='ml-2 text-black'>
                   {user?.name?.substring(0, 10)}
@@ -226,27 +226,6 @@ export default function Navbar() {
                 >
                   <MdHistory size={24} className='mr-2' />
                   Riwayat
-                </Link>
-                <Link
-                  href='/bookmark'
-                  className='flex items-center px-4 py-2 text-black hover:bg-gray-100'
-                  onClick={closeAllDropdowns}
-                >
-                  <svg
-                    className='w-5 h-5 mr-2'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='2'
-                    viewBox='0 0 24 24'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M5 3v18l7-7 7 7V3z'
-                    ></path>
-                  </svg>
-                  Bookmark
                 </Link>
                 <Link
                   href='/pengaturan'
@@ -414,15 +393,6 @@ export default function Navbar() {
                     onClick={handleMenuItemClick}
                   >
                     Riwayat
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/bookmark'
-                    className='text-white'
-                    onClick={handleMenuItemClick}
-                  >
-                    Bookmark
                   </Link>
                 </li>
                 <li>

@@ -5,12 +5,14 @@ import CardContent from "./CardContent";
 import data from "./CardData";
 import {API_DEV_URL} from "@/lib/config";
 import {getToken} from "@/lib/auth";
+import Skeleton from "@/components/atoms/flowbite/Skeleton";
+import Link from "next/link";
 
 export default function CardDiscussion() {
   const [discusses, setDiscusses] = useState([]);
   const [errorDiscussion, setErrorDiscussion] = useState(null);
+  const [loading, setLoading] = useState(true);
   const token = getToken();
-  console.log(discusses);
 
   useEffect(() => {
     const fetchDiscussion = async () => {
@@ -25,7 +27,6 @@ export default function CardDiscussion() {
             Authorization: `Bearer ${getToken()}`,
           },
         });
-        console.log(response);
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -38,21 +39,38 @@ export default function CardDiscussion() {
         setErrorDiscussion(
           error.message || "Gagal dalam mengambil data diskusi"
         );
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchDiscussion();
   }, [token]);
 
+  if (errorDiscussion) {
+    return (
+      <div className='p-4 bg-red-100 text-red-600 rounded-lg'>
+        <p>{errorDiscussion}</p>
+      </div>
+    );
+  }
+
   return (
     <div className='space-y-4'>
+      <ul className='grid gap-4'>
+        {loading &&
+          Array.from({length: 5}).map((_, index) => (
+            <Skeleton className={"bg-agro-dark-green h-52"} key={index} />
+          ))}
+      </ul>
       {discusses.map((item, index) => (
-        <div
+        <Link
+          href={`/diskusi/${item.slug}` ?? ""}
           key={index}
-          className='bg-agro-light-gray p-4 rounded-lg shadow-md'
+          className='block bg-agro-light-gray p-4 rounded-lg shadow-md'
         >
           <CardContent {...item} />
-        </div>
+        </Link>
       ))}
     </div>
   );

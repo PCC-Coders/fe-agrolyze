@@ -15,7 +15,7 @@ const ArticleSection = () => {
       try {
         const response = await fetch(`${API_DEV_URL}/post?per_page=3`);
         const {data} = await response.json();
-        setArticle(data);
+        setArticle(data.data);
       } catch (error) {
         setError("Gagal dalam mengambil data artikel");
       } finally {
@@ -34,6 +34,8 @@ const ArticleSection = () => {
     );
   }
 
+  console.log(article);
+
   return (
     <section className='bg-agro-dark-green text-white py-10'>
       <div className='lg:p-24 container mx-auto'>
@@ -41,11 +43,19 @@ const ArticleSection = () => {
           Berita & Artikel
         </h2>
         <ul className='grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-center px-3'>
-          {loading &&
-            Array.from({length: 3}).map((_, index) => <Skeleton key={index} />)}
-          {article.slice(0, 3).map((article, index) => (
+          {article?.length > 0 &&
+            loading &&
+            Array.from({length: 3}).map((_, index) => (
+              <Skeleton color={"bg-agro-green"} key={index} />
+            ))}
+          {article?.slice(0, 3).map((article, index) => (
             <ArticleItem {...article} key={index} />
           ))}
+          {article?.length === 0 && (
+            <p className='font-semibold text-center text-lg'>
+              Tidak ada artikel
+            </p>
+          )}
         </ul>
       </div>
     </section>

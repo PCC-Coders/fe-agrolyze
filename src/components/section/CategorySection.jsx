@@ -13,9 +13,9 @@ const CategorySection = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`${API_DEV_URL}/master/post-category`);
-        const {data} = response.data;
-        setCategories(data);
+        const response = await fetch(`${API_DEV_URL}/master/post-category`);
+        const data = await response.json();
+        setCategories(data.data);
       } catch (err) {
         setError("Gagal dalam mengambil data kategori");
       }
@@ -41,6 +41,9 @@ const CategorySection = () => {
             <span className='text-agro-yellow'>Kategori</span> Tanaman di
             Indonesia
           </h2>
+          {categories.length === 0 && (
+            <p className='text-lg font-semibold'>Tidak ada kategori</p>
+          )}
           <ul className='grid lg:grid-cols-2 gap-8 items-center px-6 md:px-0'>
             {categories.map((category) => (
               <CategoryItem key={category.name} {...category} />

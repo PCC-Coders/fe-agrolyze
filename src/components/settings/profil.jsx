@@ -1,17 +1,34 @@
 import {useEffect, useState} from "react";
 import dataProfil from "./data";
 import Image from "next/image";
-import {getUserProfile} from "@/lib/auth";
+import {getToken, getUserProfile} from "@/lib/auth";
 
 export default function Profil() {
   const [user, setUser] = useState(null);
   const {tentangSaya, foto} = dataProfil;
+  const [isClient, setIsClient] = useState(false);
+  const token = getToken();
 
   useEffect(() => {
-    getUserProfile()
-      .then((res) => setUser(res))
-      .catch((err) => err);
+    setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    if (token && isClient) {
+      getUserProfile()
+        .then((data) => {
+          setUser(data.data);
+        })
+        .catch((err) => {
+          console.error("Error fetching user profile:", err);
+          setUser(null);
+        });
+    } else {
+      setUser(null);
+    }
+  }, [isClient, token]);
+
+  console.log(user);
 
   const handleFotoUpload = (e) => {
     const file = e.target.files[0];
@@ -35,11 +52,11 @@ export default function Profil() {
       <div className='flex flex-col md:flex-row items-center gap-8 mb-4'>
         <div className='w-20 h-20 md:w-28 md:h-28 overflow-hidden'>
           <Image
-            src={foto}
+            src={user?.image ?? "/images/foto_profil.svg"}
             alt='Foto Profil'
             width={100}
             height={100}
-            className='h-full w-full object-cover'
+            className='h-full w-full rounded-full object-cover'
           />
         </div>
         <div className='text-center md:text-left'>
@@ -63,17 +80,6 @@ export default function Profil() {
       </div>
 
       <form>
-        <div className='mb-4'>
-          <label className='block text-sm md:text-base font-medium mb-2'>
-            Nama Lengkap
-          </label>
-          <input
-            type='text'
-            className='w-full p-2 border rounded'
-            defaultValue={user?.name}
-          />
-        </div>
-
         <div className='mb-4'>
           <label className='block text-sm md:text-base font-medium mb-2'>
             Username
@@ -104,7 +110,7 @@ export default function Profil() {
           <textarea
             className='w-full p-2 border rounded'
             rows='4'
-            defaultValue={tentangSaya}
+            defaultValue={user?.bio ?? ""}
           />
         </div>
 

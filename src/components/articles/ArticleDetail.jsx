@@ -1,3 +1,4 @@
+import {PUBLIC_STORAGE_URL} from "@/lib/config";
 import {formattedDate} from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,11 +19,11 @@ const ArticleDetail = ({article}) => {
               Ditulis oleh {article.user?.name}
             </p>
             <p className='text-gray-400 text-sm'>
-              {formattedDate(article.updated_at)}
+              {formattedDate(article.created_at)}
             </p>
           </div>
           <Image
-            src={"/images/padi.png"}
+            src={`${PUBLIC_STORAGE_URL}/uploads/posts/${article.imageUrl}`}
             alt='Gambar'
             width={500}
             height={500}

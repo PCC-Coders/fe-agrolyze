@@ -9,7 +9,7 @@ export default function PaginationFlowbite() {
   const onPageChange = (page) => setCurrentPage(page);
 
   return (
-    <div className='flex overflow-x-auto sm:justify-center'>
+    <div className=' flex overflow-x-auto sm:justify-center'>
       <Pagination
         currentPage={currentPage}
         totalPages={100}

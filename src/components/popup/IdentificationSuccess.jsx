@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-const IdentificationSuccessModal = ({isOpen, onClose, data}) => {
+const IdentificationSuccessModal = ({isOpen, onClose, data, message}) => {
   if (!isOpen) return null;
 
   return (
@@ -14,13 +14,15 @@ const IdentificationSuccessModal = ({isOpen, onClose, data}) => {
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className='text-center text-xl font-semibold text-green-600'>
-          {"Identifikasi Informasi Tanaman berhasil!"}
+          {message && message == "Plant disease record created successfully"
+            ? "Identifikasi Informasi Tanaman berhasil!"
+            : "Identifikasi Informasi Tanaman Gagal!"}
         </h3>
 
         {data && (
           <div className='mt-4'>
             <h4 className='text-lg font-bold text-gray-800'>Nama Tanaman:</h4>
-            <p className='text-sm text-gray-600'>{data.name}</p>
+            <p className='text-sm text-gray-600'>{data.plant_name}</p>
 
             <h4 className='text-lg font-bold text-gray-800 mt-4'>
               Probabilitas:
@@ -36,7 +38,7 @@ const IdentificationSuccessModal = ({isOpen, onClose, data}) => {
                 </h4>
                 <Image
                   src={data.image}
-                  alt={data.name}
+                  alt={data.plant_name}
                   width={400}
                   height={400}
                   className='w-full h-[100px] md:h-[200px] object-cover rounded-lg mt-2'
@@ -60,7 +62,7 @@ const IdentificationSuccessModal = ({isOpen, onClose, data}) => {
               <h4 className='text-lg font-bold text-gray-800 mt-4'>
                 Penjelasan:
               </h4>
-              <p className='text-sm text-gray-600'>{data.explanation}</p>
+              <p className='text-sm text-gray-600'>{data.explaination}</p>
             </div>
           </div>
         )}

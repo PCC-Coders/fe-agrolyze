@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const CategoryItem = ({name, slug}) => {
+const CategoryItem = ({name}) => {
   return (
     <li>
-      <Link href={`kategori/${slug}`} className='flex gap-4 items-center'>
+      <Link href='#' className='flex gap-4 items-center'>
         <Image
           src='/images/icon-tanaman.png'
           alt='Icon'
@@ -13,7 +13,6 @@ const CategoryItem = ({name, slug}) => {
         />
         <div>
           <h3 className='font-semibold'>{name}</h3>
-          <p className='text-sm'>{slug}</p>
         </div>
       </Link>
     </li>

@@ -1,7 +1,12 @@
-const Skeleton = () => {
+const Skeleton = ({className, color}) => {
   return (
-    <li role='status' className='w-full rounded shadow animate-pulse'>
-      <div className='flex items-center justify-center h-80 mb-4 bg-agro-green rounded'>
+    <li
+      role='status'
+      className={`${className} w-full rounded shadow animate-pulse`}
+    >
+      <div
+        className={`flex items-center justify-center h-80 mb-4 ${color} rounded`}
+      >
         <svg
           className='w-10 h-10 text-agro-dark-green '
           aria-hidden='true'
@@ -13,10 +18,10 @@ const Skeleton = () => {
           <path d='M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z' />
         </svg>
       </div>
-      <div className='h-2.5 bg-agro-green rounded-full w-48 mb-4'></div>
-      <div className='h-2 bg-agro-green rounded-full mb-2.5'></div>
-      <div className='h-2 bg-agro-green rounded-full mb-2.5'></div>
-      <div className='h-2 bg-agro-green rounded-full'></div>
+      <div className={`h-2.5 ${color} rounded-full w-48 mb-4`}></div>
+      <div className={`h-2 ${color} rounded-full mb-2.5`}></div>
+      <div className={`h-2 ${color} rounded-full mb-2.5`}></div>
+      <div className={`h-2 ${color} rounded-full`}></div>
       <span className='sr-only'>Loading...</span>
     </li>
   );
