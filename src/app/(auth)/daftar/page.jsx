@@ -7,7 +7,7 @@ import {useRouter} from "next/navigation";
 import Loading from "@/components/loading";
 import SuccessRegister from "@/components/popup/SuccessRegister";
 import {getToken, setToken} from "@/lib/auth";
-import {API_BASE_URL} from "@/lib/config";
+import {API_BASE_URL, API_DEV_URL} from "@/lib/config";
 
 export default function Register() {
   const [isClient, setIsClient] = useState(false);
@@ -23,7 +23,7 @@ export default function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
-  const token = getToken();
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -54,6 +54,9 @@ export default function Register() {
 
     const url = `${API_DEV_URL}/auth/register`;
     const form = new FormData();
+    if (file) {
+      form.append("image", file);
+    }
     form.append("name", name);
     form.append("email", email);
     form.append("password", password);
@@ -79,6 +82,10 @@ export default function Register() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   const handleModalClose = () => {
@@ -108,14 +115,28 @@ export default function Register() {
             {/* Nama Pengguna */}
             <div className='mb-4'>
               <label className='block text-sm sm:text-lg mb-2' htmlFor='name'>
-                Username
+                Avatar
+              </label>
+              <input
+                id='image'
+                type='file'
+                value={formData.image}
+                onChange={handleFileChange}
+                placeholder='image'
+                className='w-full border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300 placeholder-agro-placeholder text-black text-sm sm:text-base'
+              />
+            </div>
+
+            <div className='mb-4'>
+              <label className='block text-sm sm:text-lg mb-2' htmlFor='name'>
+                Name
               </label>
               <input
                 id='name'
                 type='text'
                 value={formData.name}
                 onChange={handleInputChange}
-                placeholder='username'
+                placeholder='name'
                 className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300 placeholder-agro-placeholder text-black text-sm sm:text-base'
               />
             </div>
@@ -198,7 +219,7 @@ export default function Register() {
               </button>
             </div>
 
-            {error && <p className='text-red-500 text-sm mb-4'>{error}</p>}
+            {error && <p className='text-red-900 text-sm mb-4'>{error}</p>}
 
             {/* Tombol Register */}
             <button
