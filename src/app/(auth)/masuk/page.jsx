@@ -1,14 +1,14 @@
 "use client";
 
-import React, {useEffect, useState} from "react";
-import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Link from "next/link";
 import Image from "next/image";
-import {getToken, setToken} from "@/lib/auth";
+import { getToken, setToken } from "@/lib/auth";
 import Loading from "@/components/loading";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import SuccessLogin from "@/components/popup/SuccesLogin";
-import {API_BASE_URL, API_DEV_URL} from "@/lib/config";
+import { API_BASE_URL, API_DEV_URL } from "@/lib/config";
 
 export default function Login() {
   const [isClient, setIsClient] = useState(false);
@@ -78,53 +78,53 @@ export default function Login() {
 
   return (
     <div
-      className='relative min-h-screen bg-cover bg-center'
-      style={{backgroundImage: `url('/images/Register.svg')`}}
+      className="relative min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: `url('/images/Register.svg')` }}
     >
       {/* Overlay */}
-      <div className='absolute inset-0 bg-black opacity-50'></div>
+      <div className="absolute inset-0 bg-black opacity-50"></div>
 
       {/* Card */}
-      <div className='relative z-10 flex items-center justify-center min-h-screen'>
-        <div className='bg-white bg-opacity-30 backdrop-blur-md rounded-xl shadow-lg p-8 w-[350px]'>
-          <h2 className='text-2xl sm:text-4xl font-bold text-agro-dark-green mb-4'>
+      <div className="relative z-10 flex items-center justify-center min-h-screen">
+        <div className="bg-white bg-opacity-30 backdrop-blur-md rounded-xl shadow-lg p-8 w-[350px]">
+          <h2 className="text-2xl sm:text-4xl font-bold text-agro-dark-green mb-4">
             Masuk
           </h2>
           <form onSubmit={handleSubmit}>
             {/* Email */}
-            <div className='mb-4'>
-              <label className='block text-sm sm:text-lg mb-2' htmlFor='email'>
+            <div className="mb-4">
+              <label className="block text-sm sm:text-lg mb-2" htmlFor="email">
                 Email
               </label>
               <input
-                id='email'
-                type='email'
+                id="email"
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder='email@gmail.com'
-                className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300 placeholder-agro-placeholder text-black text-sm sm:text-base'
+                placeholder="email@gmail.com"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300 placeholder-agro-placeholder text-black text-sm sm:text-base"
               />
             </div>
 
             {/* Password */}
-            <div className='mb-4 relative'>
+            <div className="mb-4 relative">
               <label
-                className='block text-sm sm:text-lg mb-2'
-                htmlFor='password'
+                className="block text-sm sm:text-lg mb-2"
+                htmlFor="password"
               >
                 Password
               </label>
               <input
-                id='password'
+                id="password"
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder='password'
-                className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300 placeholder-agro-placeholder text-black text-sm sm:text-base flex items-center'
+                placeholder="password"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300 placeholder-agro-placeholder text-black text-sm sm:text-base flex items-center"
               />
               <button
-                type='button'
-                className='absolute right-3 top-9 sm:top-12 text-gray-500 focus:outline-none'
+                type="button"
+                className="absolute right-3 top-9 sm:top-12 text-gray-500 focus:outline-none"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
@@ -135,22 +135,22 @@ export default function Login() {
               </button>
             </div>
 
-            <div className='mb-3'>
-              <Link href='/'>
-                <p className='text-sm flex justify-end'>Lupa Password?</p>
+            <div className="mb-3">
+              <Link href="/forgot-password">
+                <p className="text-sm flex justify-end">Lupa Password?</p>
               </Link>
             </div>
 
             {/* Error or Success Message */}
-            {error && <p className='text-red-900 text-sm'>{error}</p>}
+            {error && <p className="text-red-900 text-sm">{error}</p>}
             {popupMessage && (
-              <p className='text-green-500 text-sm'>{popupMessage}</p>
+              <p className="text-green-500 text-sm">{popupMessage}</p>
             )}
 
             {/* Tombol Login */}
             <button
-              type='submit'
-              className='w-full bg-agro-green text-white text-base font-medium py-2 px-4 mb-3 rounded-lg focus:outline-none focus:ring focus:ring-indigo-300'
+              type="submit"
+              className="w-full bg-agro-green text-white text-base font-medium py-2 px-4 mb-3 rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
               disabled={loading}
             >
               Masuk
@@ -158,26 +158,26 @@ export default function Login() {
 
             {/* Login Google */}
             <button
-              type='button'
-              className='flex items-center px-4 py-2 mb-6 bg-white text-agro-green font-medium text-base rounded-lg w-full justify-center'
+              type="button"
+              className="flex items-center px-4 py-2 mb-6 bg-white text-agro-green font-medium text-base rounded-lg w-full justify-center"
             >
               <Image
-                src='/images/google.svg'
-                alt='Google Logo'
+                src="/images/google.svg"
+                alt="Google Logo"
                 width={100}
                 height={100}
-                className='w-5 h-5 mr-2'
+                className="w-5 h-5 mr-2"
               />
               Masuk dengan Google
             </button>
 
             {/* Have Account */}
-            <div className='text-base text-center'>
+            <div className="text-base text-center">
               <p>
                 Belum punya akun?{" "}
                 <Link
-                  href='/daftar'
-                  className='text-agro-dark-green text-semibold'
+                  href="/daftar"
+                  className="text-agro-dark-green text-semibold"
                 >
                   Daftar
                 </Link>
