@@ -29,7 +29,7 @@ export default function BookmarkPage() {
         <div className='flex items-start'>
           <div className='w-12 h-12 rounded-full overflow-hidden'>
             <Image
-              src='/profile-picture.jpg'
+              src='/images/icon_profil.svg'
               alt='Profile Picture'
               width={48}
               height={48}
@@ -38,12 +38,12 @@ export default function BookmarkPage() {
           <div className='ml-4 flex-1'>
             <p className='font-semibold'>@rudisetia</p>
             <p className='text-sm mt-1'>
-              Mohon sarannya bapak ibu sekalian gimana ya supaya tanaman cabai
+              Mohon sarannya bapak ibu sekalian gimana ya supaya tanaman apel
               tidak kena hama
             </p>
             <div className='mt-4'>
               <Image
-                src='/plant-example.jpg'
+                src='/images/apel.png'
                 alt='Post Image'
                 width={300}
                 height={200}

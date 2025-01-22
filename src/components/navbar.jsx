@@ -206,7 +206,7 @@ export default function Navbar() {
                 height={30}
                 className='rounded-full'
               />
-              <span className='ml-2 text-black'>{user?.name || "User"}</span>
+              <span className='ml-2 text-black'>{user?.name || "Neli"}</span>
               <svg
                 className={`ml-2 w-4 h-4 transition-transform ${
                   isUserDropdownOpen ? "rotate-180" : ""

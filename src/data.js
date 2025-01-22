@@ -59,7 +59,7 @@ Seiring bertambahnya jumlah penduduk dunia, kebutuhan akan tanaman pangan yang d
 Tanaman pangan juga memiliki peran vital dalam mendukung ekonomi negara, menciptakan lapangan pekerjaan di sektor pertanian, dan mengurangi ketergantungan pada impor pangan. Namun, tantangan besar seperti perubahan iklim dan degradasi tanah mengharuskan kita untuk mencari solusi yang lebih berkelanjutan dalam mengelola sumber daya alam.`,
   },
   {
-    imageUrl: "/images/padi.png",
+    imageUrl: "/images/apel.png",
     author: "Kevin Martin",
     date: "6 Sep, 2024",
     title:
@@ -70,7 +70,7 @@ Hortikultura memiliki banyak manfaat untuk kehidupan sehari-hari. Dari sisi gizi
 Selain itu, sektor hortikultura juga memberikan kontribusi signifikan terhadap perekonomian dengan menciptakan peluang bisnis bagi petani, pengusaha, dan industri pengolahan makanan. Oleh karena itu, keberadaan hortikultura tidak hanya memberi manfaat estetika, tetapi juga berfungsi sebagai pendorong ekonomi yang penting.`,
   },
   {
-    imageUrl: "/images/padi.png",
+    imageUrl: "/images/kopi.png",
     author: "Raihan",
     date: "7 Sep, 2024",
     title:
@@ -81,7 +81,7 @@ Namun, pertumbuhan pesat sektor perkebunan seringkali menimbulkan dampak negatif
 Dengan penerapan teknik-teknik seperti rotasi tanaman, agroforestry (pertanian berkelanjutan dengan pohon), dan manajemen sumber daya alam yang bijaksana, kita dapat memastikan keberlanjutan perkebunan sekaligus meningkatkan hasil produksi dalam jangka panjang.`,
   },
   {
-    imageUrl: "/images/padi.png",
+    imageUrl: "/images/apel.png",
     author: "Keihin",
     date: "7 Sep, 2024",
     title:

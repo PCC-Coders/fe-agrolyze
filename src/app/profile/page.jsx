@@ -1,16 +1,32 @@
+"use client";
+
+import dataProfil from "@/components/settings/data";
+import {getUserProfile} from "@/lib/auth";
 import Image from "next/image";
+import {useEffect, useState} from "react";
 
 export default function ProfilePage() {
+  const [user, setUser] = useState(null);
+  const {tentangSaya, foto} = dataProfil;
+
+  useEffect(() => {
+    getUserProfile()
+      .then((res) => setUser(res))
+      .catch((err) => err);
+  });
+
   return (
     <div className='min-h-screen bg-green-900'>
       {/* Header */}
       <div className='bg-black text-white p-6 flex items-center'>
-        <div className='w-24 h-24 bg-gray-400 rounded-full flex-shrink-0'></div>
+        <div className='w-24 h-24 bg-gray-400 rounded-full flex-shrink-0'>
+          <Image src={foto} alt='Foto' width={100} height={100} />
+        </div>
         <div className='ml-6'>
-          <h1 className='text-2xl font-bold'>Nama</h1>
-          <p className='text-gray-400'>@username</p>
+          <h1 className='text-2xl font-bold'>{user?.name}</h1>
+          <p className='text-gray-400'>@{user?.name}</p>
           <p className='text-gray-400'>Bergabung sejak Agustus 2024</p>
-          <p className='mt-2'>bio/deskripsi</p>
+          <p className='mt-2'>{tentangSaya} </p>
         </div>
       </div>
 
@@ -31,7 +47,7 @@ export default function ProfilePage() {
           <div className='flex items-start'>
             <div className='w-12 h-12 rounded-full overflow-hidden'>
               <Image
-                src='/profile-picture.jpg'
+                src='/images/icon_profil.svg'
                 alt='Profile Picture'
                 width={48}
                 height={48}
@@ -40,12 +56,12 @@ export default function ProfilePage() {
             <div className='ml-4 flex-1'>
               <p className='font-semibold'>@rudisetia</p>
               <p className='text-sm mt-1'>
-                Mohon sarannya bapak ibu sekalian gimana ya supaya tanaman cabai
+                Mohon sarannya bapak ibu sekalian gimana ya supaya tanaman apel
                 tidak kena hama
               </p>
               <div className='mt-4'>
                 <Image
-                  src='/plant-example.jpg'
+                  src='/images/apel.png'
                   alt='Post Image'
                   width={300}
                   height={200}
