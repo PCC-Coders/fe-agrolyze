@@ -1,13 +1,14 @@
 "use client";
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {getToken} from "@/lib/auth";
 import {FileInputFlowbite} from "@/components/atoms/flowbite/FileInput";
-import DiseaseSuccessModal from "@/components/popup/DiseaseSuccess";
+import IdentificationSuccessModal from "@/components/popup/IdentificationSuccess";
+import {API_BASE_URL, API_DEV_URL} from "@/lib/config";
 
-const PenyakitTanaman = () => {
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+const JenisTanaman = () => {
+  const [isClient, setIsClient] = useState(false);
+  const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const [identificationData, setIdentificationData] = useState(null);
   const token = getToken();
@@ -17,48 +18,48 @@ const PenyakitTanaman = () => {
   const [popupMessage, setPopupMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const handlePostIdentification = async () => {
     setLoading(true);
 
     const formData = new FormData();
-    formData.append("latitude", latitude);
-    formData.append("longitude", longitude);
 
     if (file) {
       formData.append("image", file);
     }
-
-    if (!token) {
-      setPopupMessage("Silakan login terlebih dahulu.");
-      setIsModalOpen(true);
-      setLoading(false);
-      return;
-    }
+    formData.append("address", address);
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/plant/disease/user`,
-        {
+      let response;
+
+      if (!token) {
+        response = await fetch(`${API_DEV_URL}/plant/identification/guest`, {
           method: "POST",
           body: formData,
+        });
+      } else {
+        response = await fetch(`${API_DEV_URL}/plant/identification/user`, {
+          method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
+          body: formData,
+        });
+      }
 
       const result = await response.json();
 
       if (response.ok) {
-        setPopupMessage(
-          result.message || "Identifikasi penyakit tanaman berhasil!"
-        );
+        setPopupMessage(result.message || "Identifikasi berhasil!");
         setIsModalOpen(true);
         setIdentificationData(result.data);
+        setAddress("");
+        setFile(null);
       } else {
-        setPopupMessage(
-          result.message || "Gagal mengidentifikasi penyakit tanaman."
-        );
+        setPopupMessage(result.message || "Gagal mengidentifikasi tanaman.");
         setIsModalOpen(true);
       }
     } catch (err) {
@@ -77,29 +78,28 @@ const PenyakitTanaman = () => {
     setFile(e.target.files[0]);
   };
 
+  if (!isClient) {
+    return null;
+  }
+
   return (
     <section className='bg-agro-dark-green text-white'>
-      <div className='p-20'>
+      <div className='px-2 min-h-screen grid md:p-20'>
         <div className='grid md:grid-cols-2 gap-2 md:gap-8 items-center'>
-          <FileInputFlowbite handleFileChange={handleFileChange} />
+          {isClient && (
+            <FileInputFlowbite handleFileChange={handleFileChange} />
+          )}
           <div>
             <h2 className='text-2xl lg:text-3xl text-center font-bold my-6 md:my-16'>
-              Cek <span className='text-agro-yellow'>Penyakit</span> Tanaman
+              Cek <span className='text-agro-yellow'>Informasi</span> Tanaman
             </h2>
             <div className='grid gap-2'>
               <input
                 type='text'
-                value={latitude}
-                onChange={(e) => setLatitude(e.target.value)}
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 className='rounded-lg bg-agro-green'
-                placeholder='Masukkan Garis Lintang (Latitude)'
-              />
-              <input
-                type='text'
-                value={longitude}
-                onChange={(e) => setLongitude(e.target.value)}
-                className='rounded-lg bg-agro-green'
-                placeholder='Masukkan Garis Bujur (Longitude)'
+                placeholder='Masukkan alamat tanaman yang ingin diidentifikasi'
               />
               <button
                 onClick={handlePostIdentification}
@@ -113,14 +113,16 @@ const PenyakitTanaman = () => {
         </div>
       </div>
 
-      <DiseaseSuccessModal
-        isOpen={isModalOpen}
-        message={popupMessage}
-        onClose={closeModal}
-        data={identificationData}
-      />
+      {isClient && (
+        <IdentificationSuccessModal
+          isOpen={isModalOpen}
+          message={popupMessage}
+          onClose={closeModal}
+          data={identificationData}
+        />
+      )}
     </section>
   );
 };
 
-export default PenyakitTanaman;
+export default JenisTanaman;

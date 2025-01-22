@@ -1,21 +1,25 @@
 "use client";
 
 import ArticleItem from "@/components/atoms/ArticleItem";
-import {articles} from "@/data";
+import {API_BASE_URL, API_DEV_URL} from "@/lib/config";
 import {useEffect, useState} from "react";
+import Skeleton from "../atoms/flowbite/Skeleton";
 
 const ArticleSection = () => {
   const [article, setArticle] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post`);
+        const response = await fetch(`${API_DEV_URL}/post?per_page=3`);
         const {data} = await response.json();
-        setArticle(data);
+        setArticle(data.data);
       } catch (error) {
         setError("Gagal dalam mengambil data artikel");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -30,16 +34,28 @@ const ArticleSection = () => {
     );
   }
 
+  console.log(article);
+
   return (
-    <section className='bg-agro-dark-green text-white '>
-      <div className='p-8 lg:p-24 container mx-auto'>
-        <h2 className='text-2xl lg:text-3xl text-center mb-14 font-bold'>
+    <section className='bg-agro-dark-green text-white py-10'>
+      <div className='lg:p-24 container mx-auto'>
+        <h2 className='text-2xl lg:text-3xl text-center mb-10 md:mb-20 font-bold'>
           Berita & Artikel
         </h2>
-        <ul className='grid lg:grid-cols-3 gap-8 items-center px-4'>
-          {articles.slice(0, 3).map((article, index) => (
+        <ul className='grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-center px-3'>
+          {article?.length > 0 &&
+            loading &&
+            Array.from({length: 3}).map((_, index) => (
+              <Skeleton color={"bg-agro-green"} key={index} />
+            ))}
+          {article?.slice(0, 3).map((article, index) => (
             <ArticleItem {...article} key={index} />
           ))}
+          {article?.length === 0 && (
+            <p className='font-semibold text-center text-lg'>
+              Tidak ada artikel
+            </p>
+          )}
         </ul>
       </div>
     </section>

@@ -1,19 +1,21 @@
 import React from "react";
 
-const DiseaseSuccessModal = ({isOpen, message, onClose, data}) => {
+const DiseaseSuccessModal = ({isOpen, onClose, data, message}) => {
   if (!isOpen) return null;
 
   return (
     <div
-      className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'
+      className='h-screen overflow-auto p-2 fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'
       onClick={onClose}
     >
       <div
-        className='bg-white p-6 rounded-lg max-w-lg mx-auto'
+        className='bg-white p-6 rounded-lg md:w-1/2 mx-auto'
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className='text-center text-xl font-semibold text-green-600'>
-          {message || "Identifikasi Tanaman berhasil!"}
+          {message && message == "Plant disease record created successfully"
+            ? "Identifikasi Penyakit Tanaman berhasil!"
+            : "Identifikasi Penyakit Tanaman Gagal!"}
         </h3>
 
         {data && (
@@ -36,9 +38,9 @@ const DiseaseSuccessModal = ({isOpen, message, onClose, data}) => {
                   Gambar Tanaman:
                 </h4>
                 <img
-                  src={data.image}
+                  src={data.imageUrl}
                   alt={data.disease}
-                  className='w-full h-auto rounded-lg mt-2'
+                  className='w-[200px] h-[150px] rounded-lg mt-2'
                 />
               </div>
 
@@ -49,7 +51,7 @@ const DiseaseSuccessModal = ({isOpen, message, onClose, data}) => {
                 <img
                   src={data.similar_images}
                   alt='Gambar Serupa'
-                  className='w-full h-auto rounded-lg mt-2'
+                  className='w-[200px] h-[150px] rounded-lg mt-2'
                 />
               </div>
             </div>
@@ -57,7 +59,7 @@ const DiseaseSuccessModal = ({isOpen, message, onClose, data}) => {
             <h4 className='text-lg font-bold text-gray-800 mt-4'>
               Pengobatan:
             </h4>
-            <div className='text-sm text-gray-600'>
+            <div className='text-sm text-gray-600 grid gap-2'>
               <p>
                 <strong>Pengobatan Kimia:</strong>{" "}
                 {data.treatment_id.chemical_treatment}

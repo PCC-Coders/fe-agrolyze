@@ -4,6 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import CategoryItem from "../atoms/CategoryItem";
+import {API_BASE_URL, API_DEV_URL} from "@/lib/config";
 
 const CategorySection = () => {
   const [categories, setCategories] = useState([]);
@@ -12,11 +13,9 @@ const CategorySection = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/master/post-category`
-        );
-        const {data} = response.data;
-        setCategories(data);
+        const response = await fetch(`${API_DEV_URL}/master/post-category`);
+        const data = await response.json();
+        setCategories(data.data);
       } catch (err) {
         setError("Gagal dalam mengambil data kategori");
       }
@@ -34,7 +33,7 @@ const CategorySection = () => {
   }
 
   return (
-    <section className='bg-agro-light-green text-white relative'>
+    <section className='bg-agro-light-green text-white relative pb-8 md:pb-0'>
       <div className='md:flex gap-8'>
         <Image src='/images/petani.png' alt='Petani' width={600} height={600} />
         <div>
@@ -42,7 +41,10 @@ const CategorySection = () => {
             <span className='text-agro-yellow'>Kategori</span> Tanaman di
             Indonesia
           </h2>
-          <ul className='grid md:grid-cols-2 gap-8 items-center px-6 md:px-0'>
+          {categories.length === 0 && (
+            <p className='text-lg font-semibold'>Tidak ada kategori</p>
+          )}
+          <ul className='grid lg:grid-cols-2 gap-8 items-center px-6 md:px-0'>
             {categories.map((category) => (
               <CategoryItem key={category.name} {...category} />
             ))}

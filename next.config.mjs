@@ -4,9 +4,37 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "smartagro-api.sightway.my.id",
+        port: "",
+        pathname: "/**",
+        search: "",
+      },
+      {
+        protocol: "https",
+        hostname: "plant.id",
+        port: "",
+        pathname: "/**",
+        search: "",
+      },
+      {
+        protocol: "https",
+        hostname: "plant-id.ams3.cdn.digitaloceanspaces.com",
+        port: "",
+        pathname: "/**",
+        search: "",
+      },
+      {
+        protocol: "https",
         hostname: "placehold.co",
         port: "",
-        pathname: "",
+        pathname: "/**",
+        search: "",
+      },
+      {
+        protocol: "https",
+        hostname: "agrolyze.my.id",
+        port: "",
+        pathname: "/**",
         search: "",
       },
     ],

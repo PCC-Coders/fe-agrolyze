@@ -9,7 +9,7 @@ const TutorialSection = () => {
         <h2 className='text-2xl lg:text-3xl font-bold text-center mb-20'>
           <span className='text-agro-yellow'>Cara Cek</span> Kesehatan Tanaman
         </h2>
-        <div className='flex flex-col-reverse lg:flex-row gap-12 items-center'>
+        <div className='flex flex-col-reverse md:flex-row gap-12 items-center'>
           <ul className='grid gap-8 items-center'>
             {tutorials.map((tutorial, index) => (
               <TutorialItem {...tutorial} key={index} />

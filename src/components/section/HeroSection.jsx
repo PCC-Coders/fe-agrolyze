@@ -14,7 +14,7 @@ const HeroSection = () => {
         />
       </div>
       <div className='drop-shadow-2xl absolute w-full translate-x-[-50%] translate-y-[-50%] top-[40%] left-[50%] px-4'>
-        <div className='w-[60%] px-16'>
+        <div className='lg:w-[60%] lg:px-16'>
           <p className='text-white '>Original & Natural</p>
           <h3 className='text-agro-light-yellow text-3xl lg:text-6xl font-bold'>
             Cerdas Bertani

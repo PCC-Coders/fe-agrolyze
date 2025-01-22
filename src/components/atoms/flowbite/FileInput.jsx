@@ -11,11 +11,9 @@ export function FileInputFlowbite({handleFileChange}) {
         <div className='flex flex-col items-center justify-center pb-6 pt-5'>
           <LuCloudUpload className='text-6xl text-gray-400' />
           <p className='mb-2 text-sm text-gray-400 '>
-            Drag and drop your file here
+            Seret atau letakkan file disini
           </p>
-          <p className='text-xs text-gray-400'>
-            SVG, PNG, JPG or GIF (MAX. 800x400px)
-          </p>
+          <p className='text-xs text-gray-400'>PNG, JPG, atau JPEG</p>
         </div>
         <input
           type='file'

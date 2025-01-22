@@ -7,10 +7,10 @@ import {FaYoutube} from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className='bg-agro-green text-white p-12 sm:px-10 md:px-16 lg:px-20'>
+    <footer className='bg-agro-green text-white p-8 sm:px-10 md:px-16 lg:px-20'>
       <div className='grid grid-cols-1 sm:grid-cols-2 items-center gap-8'>
         <div>
-          <Image src='/images/logo.svg' alt='' width={200} height={200} />
+          <Image src='/images/logo.svg' alt='Logo' width={200} height={200} />
           <p className='text-sm sm:text-base'>
             Dapatkan informasi terbaru tentang deteksi penyakit tanaman dan tips
             pertanian melalui media sosial kami

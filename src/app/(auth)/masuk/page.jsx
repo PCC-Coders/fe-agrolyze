@@ -1,24 +1,31 @@
 "use client";
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
 import Link from "next/link";
 import Image from "next/image";
-import {setToken} from "@/lib/auth";
+import {getToken, setToken} from "@/lib/auth";
 import Loading from "@/components/loading";
 import {useRouter} from "next/navigation";
 import SuccessLogin from "@/components/popup/SuccesLogin";
+import {API_BASE_URL, API_DEV_URL} from "@/lib/config";
 
 export default function Login() {
+  const [isClient, setIsClient] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [popupMessage, setPopupMessage] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const token = getToken();
   const router = useRouter();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +40,7 @@ export default function Login() {
 
     try {
       // Send login request
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+      const response = await fetch(`${API_DEV_URL}/auth/login`, {
         method: "POST",
         body: formData,
       });
@@ -66,6 +73,8 @@ export default function Login() {
     setIsModalOpen(false);
     router.push("/"); // Redirect to homepage when modal is closed
   };
+
+  if (!isClient) return null;
 
   return (
     <div
@@ -133,7 +142,7 @@ export default function Login() {
             </div>
 
             {/* Error or Success Message */}
-            {error && <p className='text-red-500 text-sm'>{error}</p>}
+            {error && <p className='text-red-900 text-sm'>{error}</p>}
             {popupMessage && (
               <p className='text-green-500 text-sm'>{popupMessage}</p>
             )}

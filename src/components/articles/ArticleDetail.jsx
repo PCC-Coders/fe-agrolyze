@@ -1,27 +1,12 @@
-import {articles} from "@/data";
+import {PUBLIC_STORAGE_URL} from "@/lib/config";
+import {formattedDate} from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import {MdKeyboardArrowLeft} from "react-icons/md";
 
-const getArticleBySlug = async (slug) => {
-  return articles.find((article) => article.slug == slug);
-};
-
-const DetailArtikel = async ({params}) => {
-  const {slug} = params;
-
-  const article = await getArticleBySlug(slug);
-
-  if (!article) {
-    return (
-      <div className='bg-agro-dark-green text-white text-center font-semibold p-20'>
-        Artikel tidak ditemukan.
-      </div>
-    );
-  }
-
+const ArticleDetail = ({article}) => {
   return (
-    <section className='bg-agro-dark-green text-white p-8 lg:p-16'>
+    <>
       <Link href='/artikel' className='flex items-center mb-12'>
         <MdKeyboardArrowLeft className='text-3xl' />
         Kembali
@@ -31,12 +16,14 @@ const DetailArtikel = async ({params}) => {
           <div>
             <h2 className='text-3xl font-bold'>{article.title}</h2>
             <p className='text-gray-400 font-semibold text-lg'>
-              Ditulis oleh {article.author}
+              Ditulis oleh {article.user?.name}
             </p>
-            <p className='text-gray-400 text-sm'>{article.date}</p>
+            <p className='text-gray-400 text-sm'>
+              {formattedDate(article.created_at)}
+            </p>
           </div>
           <Image
-            src={article.imageUrl}
+            src={`${PUBLIC_STORAGE_URL}/uploads/posts/${article.imageUrl}`}
             alt='Gambar'
             width={500}
             height={500}
@@ -45,8 +32,8 @@ const DetailArtikel = async ({params}) => {
         </div>
         <div>{article.content}</div>
       </div>
-    </section>
+    </>
   );
 };
 
-export default DetailArtikel;
+export default ArticleDetail;

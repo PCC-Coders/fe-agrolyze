@@ -3,7 +3,7 @@ import Navbar from "@/components/navbar";
 import "./globals.css";
 
 export const metadata = {
-  title: "AgroLens",
+  title: "Agrolyze",
   description: "Cerdas Bertani, Panen Berarti",
 };
 
@@ -16,7 +16,7 @@ export default function RootLayout({children}) {
           rel='stylesheet'
         />
       </head>
-      <body>
+      <body className='bg-agro-green'>
         <Navbar />
         {children}
         <Footer />
