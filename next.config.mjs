@@ -30,6 +30,13 @@ const nextConfig = {
         pathname: "/**",
         search: "",
       },
+      {
+        protocol: "https",
+        hostname: "agrolyze.my.id",
+        port: "",
+        pathname: "/**",
+        search: "",
+      },
     ],
   },
 };
