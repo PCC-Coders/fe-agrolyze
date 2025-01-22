@@ -104,7 +104,7 @@ export default function Profil() {
             Update Foto
           </label>
           <input
-            id='upload-foto'
+            id='image'
             type='file'
             accept='image/*'
             className='hidden'
